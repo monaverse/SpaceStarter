@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/mona-template.unity
+    path: Assets/Scenes/Space.unity
     guid: caed008edd62fae48b0f83ef3b63cf84
   m_configObjects: {}
