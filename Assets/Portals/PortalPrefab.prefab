@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 440008201212963502}
   - component: {fileID: 4000403559507922742}
   m_Layer: 0
-  m_Name: Portal1
+  m_Name: Portal2
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 1876421112208516389}
   - component: {fileID: 3858031526364123106}
   m_Layer: 0
-  m_Name: ExamplePortal(ReplaceWithYourPortalObject)
+  m_Name: ExamplePortal(ReplaceWithYourPortalObject)2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5700025171952844531}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

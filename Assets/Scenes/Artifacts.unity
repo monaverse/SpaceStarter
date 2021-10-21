@@ -130,17 +130,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6653812972031904638, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10
+    - target: {fileID: 5526659056443283547, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
+      propertyPath: m_Name
+      value: ExampleArtifact(ReplaceWithYourArtifact)
       objectReference: {fileID: 0}
-    - target: {fileID: 6653812972031904638, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653812972031904638, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -6.86
+    - target: {fileID: 6653812973546531442, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
+      propertyPath: m_Name
+      value: Artifact1
       objectReference: {fileID: 0}
     - target: {fileID: 8909893293439360176, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
       propertyPath: m_RootOrder
@@ -189,10 +185,6 @@ PrefabInstance:
     - target: {fileID: 8909893293439360179, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
       propertyPath: m_Name
       value: Artifacts
-      objectReference: {fileID: 0}
-    - target: {fileID: 8909893293439360179, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
-      propertyPath: m_TagString
-      value: ArtifactLayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}

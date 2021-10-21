@@ -130,25 +130,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2022969928664198323, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
+      propertyPath: m_Name
+      value: Portal1
+      objectReference: {fileID: 0}
     - target: {fileID: 5026807338842304970, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5071991944104819622, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -24
-      objectReference: {fileID: 0}
-    - target: {fileID: 5071991944104819622, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
+      propertyPath: m_Name
+      value: ExamplePortal(ReplaceWithYourPortalObject)
       objectReference: {fileID: 0}
     - target: {fileID: 6509874187666525721, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
       propertyPath: m_Name
       value: Portals
-      objectReference: {fileID: 0}
-    - target: {fileID: 6509874187666525721, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
-      propertyPath: m_TagString
-      value: PortalLayer
       objectReference: {fileID: 0}
     - target: {fileID: 6509874187666525722, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
       propertyPath: m_RootOrder

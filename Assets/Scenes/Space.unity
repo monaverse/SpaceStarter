@@ -134,10 +134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Space
       objectReference: {fileID: 0}
-    - target: {fileID: 4175920465985117494, guid: 53eaea1200e896346ae7c4c470cb0c03, type: 3}
-      propertyPath: m_TagString
-      value: Space
-      objectReference: {fileID: 0}
     - target: {fileID: 4175920465985117495, guid: 53eaea1200e896346ae7c4c470cb0c03, type: 3}
       propertyPath: m_RootOrder
       value: 0
