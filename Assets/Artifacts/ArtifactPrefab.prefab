@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 919630010395187472}
   - component: {fileID: 919630010395187473}
   m_Layer: 0
-  m_Name: Artifact1
+  m_Name: Artifact2
   m_TagString: Artifact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919630010885453855}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 803884618006091132}
   - component: {fileID: 8429539127368146476}
   m_Layer: 0
-  m_Name: ExampleArtifact(ReplaceWithYourArtifact)
+  m_Name: ExampleArtifact(ReplaceWithYourArtifact)2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
