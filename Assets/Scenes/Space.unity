@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 992436400661332914, guid: 53eaea1200e896346ae7c4c470cb0c03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4175920465985117494, guid: 53eaea1200e896346ae7c4c470cb0c03, type: 3}
       propertyPath: m_Name
       value: Space

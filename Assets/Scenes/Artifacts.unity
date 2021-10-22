@@ -134,9 +134,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExampleArtifact(ReplaceWithYourArtifact)
       objectReference: {fileID: 0}
+    - target: {fileID: 6653812972031904638, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6653812973546531442, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
       propertyPath: m_Name
       value: Artifact1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603390558069597484, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8909893293439360176, guid: 1e63cea8cd5ff6341829188d8db4f75a, type: 3}
       propertyPath: m_RootOrder
