@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1534943128579649898, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2022969928664198323, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
       propertyPath: m_Name
       value: Portal1
@@ -137,6 +141,10 @@ PrefabInstance:
     - target: {fileID: 5026807338842304970, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
       propertyPath: m_Name
       value: ExamplePortal(ReplaceWithYourPortalObject)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5071991944104819622, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6509874187666525721, guid: 59e2def31e052604b90cd367a2a773f7, type: 3}
       propertyPath: m_Name
