@@ -11,6 +11,7 @@ TagManager:
   - PortalLayer
   - StageLayer
   - Space
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
