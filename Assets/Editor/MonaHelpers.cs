@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -18,21 +19,19 @@ public class MonaHelpers
     public static readonly string PortalsPath = "Assets/Scenes/Portals.unity";
   }
 
-  static void UpsertExportsDirectory()
+  [MenuItem("MoNA/Load Space Scenes")]
+  static void LoadScenes()
   {
-    if (!Directory.Exists(Constants.ExportsDirectory))
+    List<string> sceneList = new List<string>()
     {
-      Directory.CreateDirectory(Constants.ExportsDirectory);
-      Directory.CreateDirectory(Constants.PlaygroundDirectory);
+        Constants.SpacePath,
+        Constants.PortalsPath,
+        Constants.ArtifactsPath
+    };
+    foreach (string scene in sceneList)
+    {
+      EditorSceneManager.OpenScene(scene, OpenSceneMode.Additive);
     }
-  }
-
-  static void OpenDirectory(string directory)
-  {
-    List<string> list = new List<string>(Application.dataPath.Split('/'));
-    list.RemoveAt(list.Count - 1);
-    string directoryPath = string.Join("/", list.ToArray()) + "/" + directory;
-    Application.OpenURL("file://" + directoryPath);
   }
 
   [MenuItem("MoNA/Build Playground Files")]
@@ -71,5 +70,22 @@ public class MonaHelpers
     AssetDatabase.ExportPackage(exportsList.ToArray(), Constants.MintingFile, ExportPackageOptions.Recurse);
 
     OpenDirectory(Constants.ExportsDirectory);
+  }
+
+  static void UpsertExportsDirectory()
+  {
+    if (!Directory.Exists(Constants.ExportsDirectory))
+    {
+      Directory.CreateDirectory(Constants.ExportsDirectory);
+      Directory.CreateDirectory(Constants.PlaygroundDirectory);
+    }
+  }
+
+  static void OpenDirectory(string directory)
+  {
+    List<string> list = new List<string>(Application.dataPath.Split('/'));
+    list.RemoveAt(list.Count - 1);
+    string directoryPath = string.Join("/", list.ToArray()) + "/" + directory;
+    Application.OpenURL("file://" + directoryPath);
   }
 }
