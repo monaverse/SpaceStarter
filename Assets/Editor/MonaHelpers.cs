@@ -19,7 +19,7 @@ public class MonaHelpers
     public static readonly string PortalsPath = "Assets/Scenes/Portals.unity";
   }
 
-  [MenuItem("MoNA/Load Space Scenes")]
+  [MenuItem("MoNA/Load Space Scenes", false, 0)]
   static void LoadScenes()
   {
     List<string> sceneList = new List<string>()
@@ -34,7 +34,7 @@ public class MonaHelpers
     }
   }
 
-  [MenuItem("MoNA/Build Playground Files")]
+  [MenuItem("MoNA/Build Playground Files", false, 2)]
   static void BuildPlaygroundAssetBundles()
   {
     UpsertExportsDirectory();
@@ -42,7 +42,7 @@ public class MonaHelpers
     OpenDirectory(Constants.ExportsDirectory);
   }
 
-  [MenuItem("MoNA/Build Mintable Files")]
+  [MenuItem("MoNA/Build Mintable Files", false, 2)]
   static void BuildMintableFiles()
   {
     UpsertExportsDirectory();
