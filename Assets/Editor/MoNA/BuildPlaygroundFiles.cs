@@ -12,7 +12,7 @@ namespace MoNA
   public class BuildPlaygroundFiles
   {
     [MenuItem("MoNA/Build Playground Files")]
-    static void BuildPlaygroundFilesHandler()
+    public static void BuildPlaygroundFilesHandler()
     {
       Helpers.UpsertExportsDirectory();
       BuildPipeline.BuildAssetBundles(Constants.PlaygroundDirectory, BuildAssetBundleOptions.None, BuildTarget.WebGL);
