@@ -17,6 +17,8 @@ namespace MoNA
     {
       Helpers.UpsertExportsDirectory();
 
+      BuildPlaygroundFiles.BuildPlaygroundFilesHandler();
+
       List<string> sceneList = new List<string>()
       {
         Constants.SpacePath,
@@ -25,7 +27,6 @@ namespace MoNA
       };
 
       List<string> exportsList = new List<string>();
-
 
       foreach (string scene in sceneList)
       {
