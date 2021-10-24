@@ -7,10 +7,14 @@
 <h1 align="center">🎨 Official MoNA Space Starter 🎨</h1>
 <p align="center">Start building your own custom MoNA Space using our official template</p>
 
-## Documentation
+## ⚠️ Unity Version
+This template requires the ```Unity 2020.3.18``` version. You can download it here:
+https://unity3d.com/get-unity/download/archive
+
+## 📃 Documentation
 
 The official documentation website is [docs.mona.gallery](https://docs.mona.gallery/build).
 
-## Support
+## 💬 Support
 
 For support, join our [Discord support channel](https://discord.gg/EbuzsyRh2Q)
