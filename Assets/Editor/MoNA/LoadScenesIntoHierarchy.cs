@@ -14,6 +14,8 @@ namespace MoNA
     [MenuItem("MoNA/Load Space Scenes")]
     static void LoadScenesIntoHierarchyHandler()
     {
+      var initialScene = EditorSceneManager.GetSceneAt(0);
+      EditorSceneManager.CloseScene(initialScene, true);
       List<string> sceneList = new List<string>()
       {
         Constants.SpacePath,
@@ -24,6 +26,8 @@ namespace MoNA
       {
         EditorSceneManager.OpenScene(scene, OpenSceneMode.Additive);
       }
+      var spaceScene = EditorSceneManager.GetSceneByName("Space");
+      EditorSceneManager.SetActiveScene(spaceScene);
     }
   }
 }
