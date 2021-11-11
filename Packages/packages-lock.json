@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.marijnzwemmer.unity-toolbar-extender": {
+      "version": "git://github.com/marijnz/unity-toolbar-extender.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "df8031d46275ab1e0efc1225c33f58cda2f74872"
+    },
     "com.unity.collab-proxy": {
       "version": "1.9.0",
       "depth": 0,
