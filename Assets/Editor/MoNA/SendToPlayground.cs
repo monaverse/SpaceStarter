@@ -23,7 +23,7 @@ namespace MoNA
                 Helpers.UpsertExportsDirectory();
                 BuildPipeline.BuildAssetBundles(Constants.PlaygroundDirectory, BuildAssetBundleOptions.None, BuildTarget.WebGL);
                 Helpers.OpenDirectory(Constants.ExportsDirectory);
-                Application.OpenURL("https://www.mona.gallery/playground");
+                Application.OpenURL(Constants.PlaygroundURL);
             }
         }
     }
