@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
-namespace MoNA
+namespace Mona
 {
     public static class Constants
     {

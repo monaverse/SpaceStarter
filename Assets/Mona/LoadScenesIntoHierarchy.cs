@@ -7,11 +7,11 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
-namespace MoNA
+namespace Mona
 {
     public class LoadScenesIntoHierarchy
     {
-        [MenuItem("MoNA/Load Space Scenes")]
+        [MenuItem("Mona/Load Space Scenes")]
         static void LoadScenesIntoHierarchyHandler()
         {
             var initialScene = EditorSceneManager.GetSceneAt(0);

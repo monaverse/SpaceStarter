@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 
-namespace MoNA
+namespace Mona
 {
     public class BuildMintableFiles
     {
         // Start is called before the first frame update
-        [MenuItem("MoNA/Build Mintable Files")]
+        [MenuItem("Mona/Build Mintable Files")]
         static void BuildMintableFilesHandler()
         {
             Helpers.UpsertExportsDirectory();

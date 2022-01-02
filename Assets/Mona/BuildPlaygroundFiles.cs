@@ -7,11 +7,11 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
-namespace MoNA
+namespace Mona
 {
     public class BuildPlaygroundFiles
     {
-        [MenuItem("MoNA/Build Playground Files")]
+        [MenuItem("Mona/Build Playground Files")]
         public static void BuildPlaygroundFilesHandler()
         {
             Helpers.UpsertExportsDirectory();

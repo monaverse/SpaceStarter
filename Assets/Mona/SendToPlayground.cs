@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityToolbarExtender;
 
-namespace MoNA
+namespace Mona
 {
     [InitializeOnLoad]
     public class SendToPlayground
