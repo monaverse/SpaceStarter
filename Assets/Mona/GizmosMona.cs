@@ -2,13 +2,8 @@
 using UnityEngine;
 using UnityEditor;
 
-// Draw an image above the light when the light is not selected
-// The icon has to be stored in Assets/Gizmos
 public class GizmosMona : MonoBehaviour
 {
-
-    // Place a red sphere around a selected light.
-    // Surround the sphere dark shaded when not selected.
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
     static void drawGizmo2(Transform transform, GizmoType gizmoType)
     {
@@ -45,7 +40,7 @@ public class GizmosMona : MonoBehaviour
         if (Physics.CheckCapsule(transform.position + Vector3.up * 0.28f, transform.position + Vector3.up * 1.58f, 0.28f))
         {
             spawnNotOK = true;
-        } 
+        }
 
         if (transform.gameObject.scene.name.Equals("Space"))
         {
@@ -60,7 +55,6 @@ public class GizmosMona : MonoBehaviour
         {
             Handles.color = Color.red;
             Gizmos.color = Color.red;
-            //Gizmos.DrawIcon(transform.position, "Resources/Editor/error", true);
         }
 
         Gizmos.DrawMesh(
