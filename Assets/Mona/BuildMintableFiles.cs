@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -44,3 +45,4 @@ namespace Mona
         }
     }
 }
+#endif
