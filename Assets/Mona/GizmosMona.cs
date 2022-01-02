@@ -1,9 +1,9 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 
 // Draw an image above the light when the light is not selected
 // The icon has to be stored in Assets/Gizmos
-
 public class GizmosMona : MonoBehaviour {
 
     // Place a red sphere around a selected light.
@@ -59,3 +59,4 @@ public class GizmosMona : MonoBehaviour {
             Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
 }
+#endif
