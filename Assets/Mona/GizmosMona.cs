@@ -16,26 +16,36 @@ public class GizmosMona : MonoBehaviour
         Gizmos.color = Color.magenta * 0.6f;
 
         // Draw a arrow towards the reactor's target
-        if(reactor.OnEnterTrigger.Length != 0){
-            for (int i = 0; i < reactor.OnEnterTrigger.Length; i++)
+        if (reactor.OnEnterTrigger != null)
+        {
+            if (reactor.OnEnterTrigger.Length != 0)
             {
-                GameObject robject = reactor.OnEnterTrigger[i].Object;
-                if(robject != null){
-                    // Draw a line to the object and the reactor
-                    Gizmos.DrawLine(transform.position, robject.transform.position);
-                    Gizmos.DrawIcon(robject.transform.position, "hooked", true);
+                for (int i = 0; i < reactor.OnEnterTrigger.Length; i++)
+                {
+                    GameObject rObject = reactor.OnEnterTrigger[i].Object;
+                    if (rObject != null)
+                    {
+                        // Draw a line to the object and the reactor
+                        Gizmos.DrawLine(transform.position, rObject.transform.position);
+                        Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
+                    }
                 }
             }
         }
 
-        if(reactor.OnExitTrigger.Length != 0){
-            for (int i = 0; i < reactor.OnExitTrigger.Length; i++)
+        if (reactor.OnExitTrigger != null)
+        {
+            if (reactor.OnExitTrigger.Length != 0)
             {
-                GameObject robject = reactor.OnExitTrigger[i].Object;
-                if(robject != null){
-                    // Draw a line to the object and the reactor
-                    Gizmos.DrawLine(transform.position, robject.transform.position);
-                    Gizmos.DrawIcon(robject.transform.position, "hooked", true);
+                for (int i = 0; i < reactor.OnExitTrigger.Length; i++)
+                {
+                    GameObject rObject = reactor.OnExitTrigger[i].Object;
+                    if (rObject != null)
+                    {
+                        // Draw a line to the object and the reactor
+                        Gizmos.DrawLine(transform.position, rObject.transform.position);
+                        Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
+                    }
                 }
             }
         }
