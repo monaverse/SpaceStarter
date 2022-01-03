@@ -19,9 +19,24 @@ public class GizmosMona : MonoBehaviour
         if(reactor.OnEnterTrigger.Length != 0){
             for (int i = 0; i < reactor.OnEnterTrigger.Length; i++)
             {
-                // Draw a line to the object and the reactor
-                Gizmos.DrawLine(transform.position, reactor.OnEnterTrigger[i].Object.transform.position);
-                Gizmos.DrawIcon(reactor.OnEnterTrigger[i].Object.transform.position, "hooked", true);
+                GameObject robject = reactor.OnEnterTrigger[i].Object;
+                if(robject != null){
+                    // Draw a line to the object and the reactor
+                    Gizmos.DrawLine(transform.position, robject.transform.position);
+                    Gizmos.DrawIcon(robject.transform.position, "hooked", true);
+                }
+            }
+        }
+
+        if(reactor.OnExitTrigger.Length != 0){
+            for (int i = 0; i < reactor.OnExitTrigger.Length; i++)
+            {
+                GameObject robject = reactor.OnExitTrigger[i].Object;
+                if(robject != null){
+                    // Draw a line to the object and the reactor
+                    Gizmos.DrawLine(transform.position, robject.transform.position);
+                    Gizmos.DrawIcon(robject.transform.position, "hooked", true);
+                }
             }
         }
 
