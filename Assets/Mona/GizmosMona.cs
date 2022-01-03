@@ -5,7 +5,43 @@ using UnityEditor;
 public class GizmosMona : MonoBehaviour
 {
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
-    static void drawGizmo2(Transform transform, GizmoType gizmoType)
+    static void drawReactor(Transform transform, GizmoType gizmoType)
+    {
+        Mona.MonaReactor reactor = transform.GetComponent<Mona.MonaReactor>();
+        if (reactor == null)
+        {
+            return;
+        }
+
+        Gizmos.color = Color.magenta * 0.6f;
+
+        // Draw a arrow towards the reactor's target
+        if(reactor.OnEnterTrigger.Length != 0){
+            for (int i = 0; i < reactor.OnEnterTrigger.Length; i++)
+            {
+                // Draw a line to the object and the reactor
+                Gizmos.DrawLine(transform.position, reactor.OnEnterTrigger[i].Object.transform.position);
+                Gizmos.DrawIcon(reactor.OnEnterTrigger[i].Object.transform.position, "hooked", true);
+            }
+        }
+
+        // Draw icon from Resources folder
+        var icon = Resources.Load("Editor/Reactor") as Texture2D;
+        Gizmos.DrawIcon(transform.position, "Reactor", true);
+
+        // Draw the outline of the box collider
+        var collider = transform.GetComponent<BoxCollider>();
+        if (collider != null)
+        {
+            Gizmos.color = Color.magenta * 0.4f;
+            Gizmos.DrawWireCube(collider.center + transform.position, collider.size);
+        }
+
+
+    }
+
+    [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
+    static void drawGizmo(Transform transform, GizmoType gizmoType)
     {
 
         if (transform.tag != "SpawnPoint" || transform.gameObject.scene.name.Equals("Artifacts"))
