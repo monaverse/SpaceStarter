@@ -1,10 +1,4 @@
-<p align="center">
-  <a href="https://mona.gallery" title="MoNA">
-    <img src="https://res.cloudinary.com/mona-gallery/image/upload/v1630525523/branding/logo.png" width="200px" alt="MoNA Logo"/>
-  </a>
-</p>
-
-<h1 align="center">🎨 Official MoNA Space Starter 🎨</h1>
+![splash-min](https://user-images.githubusercontent.com/61861940/147894582-30f0b076-6647-46b2-b731-1a9535b19aa9.jpg)
 <p align="center">Start building your own custom MoNA Space using our official template</p>
 
 ## ⚠️ Unity Version
