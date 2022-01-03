@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 7704334676233442457}
   - component: {fileID: 7253657153002434182}
   m_Layer: 0
-  m_Name: UniquePortalName_2
+  m_Name: UniquePortalName_1
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
