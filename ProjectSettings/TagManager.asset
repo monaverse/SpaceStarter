@@ -12,6 +12,7 @@ TagManager:
   - StageLayer
   - Space
   - SpawnPoint
+  - Canvas
   layers:
   - Default
   - TransparentFX
