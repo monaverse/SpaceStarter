@@ -133,11 +133,7 @@ namespace Mona
                     if (_boxCollider == null && _meshCollider == null)
                     {
                         _badArtifact = true;
-#if UNITY_EDITOR
-                        // Register object
-                        s_iconRegisters.Add(TreeIcon.RegisterHierarchyItem(_artifact.gameObject.GetInstanceID(), -1, 0));
-                        s_iconRegisters.Add(TreeIcon.RegisterHierarchyItem(_artifact.transform.parent.gameObject.GetInstanceID(), 1, 0));
-#endif
+
                     }else
                     {
                         if (_boxCollider != null && _boxCollider.isTrigger)
@@ -150,6 +146,15 @@ namespace Mona
                             _badArtifact = true;
                         }
                     }
+
+                    if (_badArtifact)
+                    {
+                        // Register object
+                        s_iconRegisters.Add(TreeIcon.RegisterHierarchyItem(_artifact.gameObject.GetInstanceID(), -1, 0));
+                        s_iconRegisters.Add(TreeIcon.RegisterHierarchyItem(_artifact.transform.parent.gameObject.GetInstanceID(), 1, 0));
+                    }
+
+
                 }
             }
 
