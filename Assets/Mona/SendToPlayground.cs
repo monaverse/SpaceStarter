@@ -17,7 +17,15 @@ namespace Mona
         {
             GUILayout.FlexibleSpace();
 
-            GUI.skin.button.fontSize = 13;
+            GUI.skin.button.fontSize = 12;
+            GUI.skin.button.fixedHeight = 22;
+            GUI.skin.button.border = new RectOffset(0, 0, 0, 0);
+            GUI.skin.button.margin = new RectOffset(0, 0, 0, 0);
+            GUI.skin.button.padding = new RectOffset(10, 10, 4, 4);
+            GUI.skin.button.alignment = TextAnchor.MiddleCenter;
+            GUI.color = Color.white * 0.75f;
+            GUI.contentColor = Color.white * 1.19f;
+            
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
             {
                 Helpers.UpsertExportsDirectory();
