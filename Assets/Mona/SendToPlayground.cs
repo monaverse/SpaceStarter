@@ -28,10 +28,21 @@ namespace Mona
 
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
             {
-                Helpers.UpsertExportsDirectory();
-                BuildPipeline.BuildAssetBundles(Constants.PlaygroundDirectory, BuildAssetBundleOptions.None, BuildTarget.WebGL);
-                Helpers.OpenDirectory(Constants.ExportsDirectory);
-                Application.OpenURL(Constants.PlaygroundURL);
+                // Run QA
+                QualityAssurance.CheckQuality();
+
+                if (QualityAssurance.ErrorCodes == null || QualityAssurance.ErrorCodes.Count == 0)
+                {
+                    Helpers.UpsertExportsDirectory();
+                    BuildPipeline.BuildAssetBundles(Constants.PlaygroundDirectory, BuildAssetBundleOptions.None, BuildTarget.WebGL);
+                    Helpers.OpenDirectory(Constants.ExportsDirectory);
+                    Application.OpenURL(Constants.PlaygroundURL);
+                }
+                else
+                {
+                    // Open the QA window
+                    QAEditor.Init();
+                }
             }
         }
     }
