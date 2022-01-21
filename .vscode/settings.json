@@ -1,4 +1,4 @@
-﻿{
+{
     "files.exclude":
     {
         "**/.DS_Store":true,
@@ -52,5 +52,26 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true
-    }
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#7a69c9",
+        "activityBar.activeBorder": "#ff81ee",
+        "activityBar.background": "#7a69c9",
+        "activityBar.foreground": "#21152b",
+        "activityBar.inactiveForeground": "#21152b",
+        "activityBarBadge.background": "#ff81ee",
+        "activityBarBadge.foreground": "#21152b",
+        "sash.hoverBorder": "#7a69c9",
+        "statusBar.background": "#7a69c9",
+        "statusBar.foreground": "#21152b",
+        "statusBarItem.hoverBackground": "#7a69c9",
+        "statusBarItem.remoteBackground": "#7a69c9",
+        "statusBarItem.remoteForeground": "#21152b",
+        "titleBar.activeBackground": "#7a69c9",
+        "titleBar.activeForeground": "#21152b",
+        "titleBar.inactiveBackground": "#7a69c9",
+        "titleBar.inactiveForeground": "#21152b"
+      },
+    "peacock.color": "#7a69c9",
+    "prettier.enable": false
 }

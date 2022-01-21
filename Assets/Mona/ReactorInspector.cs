@@ -2,10 +2,11 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace Mona{
+namespace Mona
+{
 
     [CustomEditor(typeof(MonaReactor))]
-    public class ReactorInspector : Editor 
+    public class ReactorInspector : Editor
     {
 
         public override void OnInspectorGUI()
