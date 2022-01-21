@@ -32,7 +32,7 @@ namespace Mona
 
             if (_badScenes != "")
             {
-                ErrorCodes.Add(new string[] { "BAD_PORTAL_PLACEMENT", "The following portals are not placed in the portal layer: " + _badScenes });
+                SpaceErrors.Add(new string[] { "BAD_PORTAL_PLACEMENT", "The following portals are not placed in the portal layer: " + _badScenes });
             }
         }
 
@@ -78,7 +78,7 @@ namespace Mona
 
             if (_badPortals)
             {
-                ErrorCodes.Add(new string[] { "BAD_PORTAL_TAG", "Portal is missing it's Portal Tag, Add it on a object that's the 3rd child of root." });
+                SpaceErrors.Add(new string[] { "BAD_PORTAL_TAG", "Portal is missing it's Portal Tag, Add it on a object that's the 3rd child of root." });
             }
         }
 
@@ -140,7 +140,7 @@ namespace Mona
 
             if (_badPortals)
             {
-                ErrorCodes.Add(new string[] { "BAD_PORTAL_COLLIDER", "Portals Box Collider is missing or, it's a trigger, or it's disabled." });
+                SpaceErrors.Add(new string[] { "BAD_PORTAL_COLLIDER", "Portals Box Collider is missing or, it's a trigger, or it's disabled." });
             }
         }
 
@@ -176,7 +176,7 @@ namespace Mona
 
             if (_badPortals)
             {
-                ErrorCodes.Add(new string[] { "BAD_PORTAL_NAME", "Portal has the same name as another portal." });
+                SpaceErrors.Add(new string[] { "BAD_PORTAL_NAME", "Portal has the same name as another portal." });
             }
         }
 

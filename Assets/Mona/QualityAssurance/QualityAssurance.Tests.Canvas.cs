@@ -31,7 +31,7 @@ namespace Mona
 
             if (_badCanvas != "")
             {
-                ErrorCodes.Add(new string[] { "BAD_CANVAS_PLACEMENT", "The following Canvas are not placed in the ArtifactLayer: " + _badCanvas });
+                SpaceErrors.Add(new string[] { "BAD_CANVAS_PLACEMENT", "The following Canvas are not placed in the ArtifactLayer: " + _badCanvas });
             }
         }
 
@@ -67,7 +67,7 @@ namespace Mona
 
             if (_badCanvas)
             {
-                ErrorCodes.Add(new string[] { "BAD_CANVAS_NAME", "A Canvas has the same name as another canvas." });
+                SpaceErrors.Add(new string[] { "BAD_CANVAS_NAME", "A Canvas has the same name as another canvas." });
             }
         }
     }

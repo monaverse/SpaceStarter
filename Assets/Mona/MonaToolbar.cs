@@ -26,7 +26,7 @@ namespace Mona
             GUI.color = Color.white * 0.75f;
             GUI.contentColor = Color.white * 1.19f;
 
-            if (QualityAssurance.ErrorCodes != null && QualityAssurance.ErrorCodes.Count != 0)
+            if (QualityAssurance.SpaceErrors != null && QualityAssurance.SpaceErrors.Count != 0)
             {
                 GUI.contentColor = Color.red * 20.19f;
             }else{
@@ -38,7 +38,7 @@ namespace Mona
                 // Run QA
                 QualityAssurance.CheckQuality();
 
-                if (QualityAssurance.ErrorCodes == null || QualityAssurance.ErrorCodes.Count == 0)
+                if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
                 {
                     Helpers.UpsertExportsDirectory();
                     BuildPipeline.BuildAssetBundles(Constants.PlaygroundDirectory, BuildAssetBundleOptions.None, BuildTarget.WebGL);

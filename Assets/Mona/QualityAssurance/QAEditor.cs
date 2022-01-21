@@ -56,7 +56,7 @@ namespace Mona
             // Enable wrapping text
 
 
-            if (QualityAssurance.ErrorCodes == null || QualityAssurance.ErrorCodes.Count == 0)
+            if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
             {
                 GUILayout.Space(1);
                 GUILayout.Box("  √ No errors found.", _style, GUILayout.MinWidth(100));
@@ -69,7 +69,7 @@ namespace Mona
                 GUILayout.EndHorizontal();
                 GUILayout.Space(1);
 
-                foreach (string[] error in QualityAssurance.ErrorCodes)
+                foreach (string[] error in QualityAssurance.SpaceErrors)
                 {
                     GUILayout.Box("  ⚠️  " + error[0], _style, GUILayout.MinWidth(100));
                     GUILayout.BeginHorizontal("box");
