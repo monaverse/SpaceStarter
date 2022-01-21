@@ -2,8 +2,6 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-#endif
-
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -90,3 +88,4 @@ namespace Mona
         }
     }
 }
+#endif
