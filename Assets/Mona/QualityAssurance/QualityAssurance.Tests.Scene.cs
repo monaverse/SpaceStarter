@@ -32,7 +32,7 @@ namespace Mona
 
             if (_badScenes != "")
             {
-                SpaceErrors.Add(new string[] { "MISSING_LAYER", "The following scenes do not exist: " + _badScenes + ". Please create them." });
+                SpaceErrors.Add(new string[] { MonaErrorCodes.MISSING_LAYER, "The following scenes do not exist: " + _badScenes + ". Please create them." });
             }
         }
 
@@ -98,7 +98,7 @@ namespace Mona
 
             if (_badScenes != "")
             {
-                SpaceErrors.Add(new string[] { "BAD_LAYER_TAG", "The following scenes have no root level object tagged with \"Layer\": " + _badScenes });
+                SpaceErrors.Add(new string[] { MonaErrorCodes.BAD_LAYER_TAG, "The following scenes have no root level object tagged with \"Layer\": " + _badScenes });
             }
         }
     }

@@ -31,7 +31,7 @@ namespace Mona
 
             if (_badArtifacts != "")
             {
-                SpaceErrors.Add(new string[] { "BAD_ARTIFACT_PLACEMENT", "The following Artifact are not placed in the ArtifactLayer: " + _badArtifacts });
+                SpaceErrors.Add(new string[] { MonaErrorCodes.BAD_ARTIFACT_PLACEMENT, "The following Artifact are not placed in the ArtifactLayer: " + _badArtifacts });
             }
         }
 
@@ -75,7 +75,7 @@ namespace Mona
 
             if (_badArtifacts)
             {
-                SpaceErrors.Add(new string[] { "BAD_ARTIFACT_TAG", "Artifact is missing it's Artifact Tag, Add it on a object that's the 3rd child of root." });
+                SpaceErrors.Add(new string[] { MonaErrorCodes.BAD_ARTIFACT_TAG, "Artifact is missing it's Artifact Tag, Add it on a object that's the 3rd child of root." });
             }
         }
 
@@ -111,7 +111,7 @@ namespace Mona
 
             if (_badArtifact)
             {
-                SpaceErrors.Add(new string[] { "BAD_ARTIFACT_NAME", "Artifact has the same name as another Artifact." });
+                SpaceErrors.Add(new string[] { MonaErrorCodes.BAD_ARTIFACT_NAME, "Artifact has the same name as another Artifact." });
             }
         }
 
@@ -160,7 +160,7 @@ namespace Mona
 
             if (_badArtifact)
             {
-                SpaceErrors.Add(new string[] { "BAD_ARTIFACT_COLLIDER", "Artifact has no collider. Or the collider is marked as trigger!" });
+                SpaceErrors.Add(new string[] { MonaErrorCodes.BAD_ARTIFACT_COLLIDER, "Artifact has no collider. Or the collider is marked as trigger!" });
             }
         }
     }

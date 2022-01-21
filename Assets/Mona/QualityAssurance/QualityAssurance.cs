@@ -9,6 +9,26 @@ using UnityEngine.SceneManagement;
 
 namespace Mona
 {
+    public static class MonaErrorCodes
+    { 
+        // Artifact errors
+        public static string BAD_ARTIFACT_PLACEMENT = "artifact.bad-artifact-placement";
+        public static string BAD_ARTIFACT_TAG = "artifact.bad-artifact-tag";
+        public static string BAD_ARTIFACT_NAME = "artifact.bad-artifact-name";
+        public static string BAD_ARTIFACT_COLLIDER = "artifact.bad-artifact-collider";
+
+        // Canvas errors
+        public static string BAD_CANVAS_PLACEMENT = "canvas.bad-canvas-placement";
+        public static string BAD_CANVAS_NAME = "canvas.bad-canvas-name";
+
+        // Portal errors
+        public static string BAD_PORTAL_PLACEMENT = "portal.bad-portal-placement";
+        public static string BAD_PORTAL_TAG = "portal.bad-portal-tag";
+        public static string BAD_PORTAL_COLLIDER = "portal.bad-portal-collider";
+        public static string BAD_PORTAL_NAME = "portal.bad-portal-name";
+        
+    }
+
     // Quailty Checks that run both in editor and in private-build
     public static partial class QualityAssurance
     {
@@ -86,11 +106,6 @@ namespace Mona
             TestCanvasNames();
 
         }
-    }
-
-    public static class MonaConstants
-    { 
-
     }
 }
 #endif
