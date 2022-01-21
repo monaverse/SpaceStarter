@@ -97,7 +97,7 @@ namespace Mona
 
                     if (_portal.GetComponent<BoxCollider>() != null)
                     {
-                        if(!_portal.GetComponent<BoxCollider>().enabled)
+                        if (!_portal.GetComponent<BoxCollider>().enabled)
                         {
                             _badPortals = true;
                         }
@@ -151,7 +151,7 @@ namespace Mona
 
             GameObject _portalLayer = GameObject.FindGameObjectWithTag("PortalLayer");
             if (_portalLayer != null)
-            { 
+            {
                 GameObject[] _portals = GameObject.FindGameObjectsWithTag("Portal");
                 for (int i = 0; i < _portals.Length; i++)
                 {
@@ -179,6 +179,6 @@ namespace Mona
             }
         }
 
-        
+
     }
 }

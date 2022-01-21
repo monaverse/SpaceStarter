@@ -43,7 +43,7 @@ namespace Mona
 
             GameObject _artifactLayer = GameObject.FindGameObjectWithTag("ArtifactLayer");
             if (_artifactLayer != null)
-            { 
+            {
                 GameObject[] _canvas = GameObject.FindGameObjectsWithTag("Canvas");
                 for (int i = 0; i < _canvas.Length; i++)
                 {

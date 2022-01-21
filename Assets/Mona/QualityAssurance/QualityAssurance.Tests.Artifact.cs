@@ -134,7 +134,8 @@ namespace Mona
                     {
                         _badArtifact = true;
 
-                    }else
+                    }
+                    else
                     {
                         if (_boxCollider != null && _boxCollider.isTrigger)
                         {
@@ -153,7 +154,6 @@ namespace Mona
                         s_iconRegisters.Add(TreeIcon.RegisterHierarchyItem(_artifact.gameObject.GetInstanceID(), -1, 0));
                         s_iconRegisters.Add(TreeIcon.RegisterHierarchyItem(_artifact.transform.parent.gameObject.GetInstanceID(), 1, 0));
                     }
-
 
                 }
             }

@@ -25,7 +25,7 @@ namespace Mona
             GUI.skin.button.alignment = TextAnchor.MiddleCenter;
             GUI.color = Color.white * 0.75f;
             GUI.contentColor = Color.white * 1.19f;
-            
+
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
             {
                 Helpers.UpsertExportsDirectory();

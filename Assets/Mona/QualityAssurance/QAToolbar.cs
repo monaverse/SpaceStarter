@@ -16,8 +16,8 @@ namespace Mona
         static void OnToolbarGUI()
         {
             GUILayout.FlexibleSpace();
-            
-            if(QualityAssurance.ErrorCodes != null)
+
+            if (QualityAssurance.ErrorCodes != null)
             {
                 GUI.skin.button.fontSize = 12;
                 GUI.skin.button.fixedHeight = 22;

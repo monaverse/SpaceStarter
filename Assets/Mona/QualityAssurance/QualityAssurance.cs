@@ -27,11 +27,15 @@ namespace Mona
             // Add a test error
             ErrorCodes = new List<string[]>();
 
-            if(s_iconRegisters == null){
+            if (s_iconRegisters == null)
+            {
                 s_iconRegisters = new List<int>();
-            }else{
+            }
+            else
+            {
                 // Remove all registered icons
-                foreach(int i in s_iconRegisters){
+                foreach (int i in s_iconRegisters)
+                {
                     TreeIcon.UnregisterHierarchyItem(i);
                 }
             }

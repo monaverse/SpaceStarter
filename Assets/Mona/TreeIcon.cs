@@ -63,7 +63,8 @@ namespace Mona
                 GUI.DrawTexture(_h, Icons[_icon[1]]);
             }
 
-            if (_icon[0] != -1){
+            if (_icon[0] != -1)
+            {
                 GUI.DrawTexture(_r, Icons[_icon[0]]);
             }
         }
