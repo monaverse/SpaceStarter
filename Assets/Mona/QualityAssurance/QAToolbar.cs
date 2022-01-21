@@ -32,7 +32,7 @@ namespace Mona
                 GUI.contentColor = Color.white * 1.2f;
             }
 
-            if (GUILayout.Button(new GUIContent("▲ Quality Assurance", "QA")))
+            if (GUILayout.Button(new GUIContent("▲ QA", "QA")))
             {
                 // Open the QA window
                 QAEditor.Init();
