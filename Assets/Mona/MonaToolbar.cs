@@ -6,9 +6,9 @@ using UnityToolbarExtender;
 namespace Mona
 {
     [InitializeOnLoad]
-    public class QAToolbar
+    public class MonaToolbar
     {
-        static QAToolbar()
+        static MonaToolbar()
         {
             ToolbarExtender.RightToolbarGUI.Add(OnToolbarGUI);
         }
@@ -24,6 +24,7 @@ namespace Mona
             GUI.skin.button.padding = new RectOffset(10, 10, 4, 4);
             GUI.skin.button.alignment = TextAnchor.MiddleCenter;
             GUI.color = Color.white * 0.75f;
+            GUI.contentColor = Color.white * 1.19f;
 
             if (QualityAssurance.ErrorCodes != null && QualityAssurance.ErrorCodes.Count != 0)
             {
@@ -32,12 +33,32 @@ namespace Mona
                 GUI.contentColor = Color.white * 1.2f;
             }
 
+            if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
+            {
+                // Run QA
+                QualityAssurance.CheckQuality();
+
+                if (QualityAssurance.ErrorCodes == null || QualityAssurance.ErrorCodes.Count == 0)
+                {
+                    Helpers.UpsertExportsDirectory();
+                    BuildPipeline.BuildAssetBundles(Constants.PlaygroundDirectory, BuildAssetBundleOptions.None, BuildTarget.WebGL);
+                    Helpers.OpenDirectory(Constants.ExportsDirectory);
+                    Application.OpenURL(Constants.PlaygroundURL);
+                }
+                else
+                {
+                    // Open the QA window
+                    QAEditor.Init();
+                }
+            }
+
             if (GUILayout.Button(new GUIContent("▲ QA", "QA")))
             {
                 // Open the QA window
                 QAEditor.Init();
             }
             GUI.color = Color.white;
+
         }
     }
 }
