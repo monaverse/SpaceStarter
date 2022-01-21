@@ -26,6 +26,10 @@ namespace Mona
         public static string BAD_PORTAL_TAG = "portal.bad-portal-tag";
         public static string BAD_PORTAL_COLLIDER = "portal.bad-portal-collider";
         public static string BAD_PORTAL_NAME = "portal.bad-portal-name";
+
+        // Scene errors
+        public static string MISSING_LAYER = "scene.missing-layer";
+        public static string BAD_LAYER_TAG = "scene.bad-layer-tag";
         
     }
 
