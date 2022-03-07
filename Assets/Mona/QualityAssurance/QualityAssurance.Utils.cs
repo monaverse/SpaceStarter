@@ -1,5 +1,3 @@
-#if UNITY_EDITOR
-
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -10,6 +8,8 @@ namespace Mona
     // Quailty Checks that run both in editor and in private-build
     public static partial class QualityAssurance
     {
+        public static Dictionary<string, string> ErrorDescriptionMap;
+
         // Recursively check all gameobjects and their children's children
         public static GameObject[] GetAllChildren(GameObject parent)
         {
@@ -35,7 +35,21 @@ namespace Mona
             }
             return null;
         }
+
+        public static void InitDescriptions()
+        {
+            if (ErrorDescriptionMap != null) return;
+            ErrorDescriptionMap = MonaErrorCodes.GetErrorDescriptionMap();
+        }
+
+        public static string GetErrorDescription(string error)
+        {
+            InitDescriptions();
+
+            if (!ErrorDescriptionMap.ContainsKey(error)) return "";
+
+            return ErrorDescriptionMap[error];
+
+        }
     }
 }
-
-#endif
