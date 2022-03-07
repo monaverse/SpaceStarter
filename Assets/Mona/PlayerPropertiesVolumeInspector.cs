@@ -4,11 +4,9 @@ using UnityEditor;
 
 namespace Mona
 {
-
     [CustomEditor(typeof(PlayerPropertiesVolume))]
     public class PlayerPropertiesVolumeInspector : Editor
     {
-
         public override void OnInspectorGUI()
         {
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/ppv.png", typeof(Texture));

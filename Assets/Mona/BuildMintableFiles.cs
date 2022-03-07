@@ -21,11 +21,11 @@ namespace Mona
             BuildPlaygroundFiles.BuildPlaygroundFilesHandler();
 
             List<string> sceneList = new List<string>()
-      {
-        Constants.SpacePath,
-        Constants.PortalsPath,
-        Constants.ArtifactsPath
-      };
+            {
+                Constants.SpacePath,
+                Constants.PortalsPath,
+                Constants.ArtifactsPath
+            };
 
             List<string> exportsList = new List<string>();
 

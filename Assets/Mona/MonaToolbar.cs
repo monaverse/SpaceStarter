@@ -29,7 +29,9 @@ namespace Mona
             if (QualityAssurance.SpaceErrors != null && QualityAssurance.SpaceErrors.Count != 0)
             {
                 GUI.contentColor = Color.red * 20.19f;
-            }else{
+            }
+            else
+            {
                 GUI.contentColor = Color.white * 1.2f;
             }
 

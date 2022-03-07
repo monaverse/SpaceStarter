@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Mona
 {
-
     public partial class MonaReactor
     {
         public void ReactorAwake() { }

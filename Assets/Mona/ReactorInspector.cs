@@ -4,11 +4,9 @@ using UnityEditor;
 
 namespace Mona
 {
-
     [CustomEditor(typeof(MonaReactor))]
     public class ReactorInspector : Editor
     {
-
         public override void OnInspectorGUI()
         {
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/reactor.png", typeof(Texture));

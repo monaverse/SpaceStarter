@@ -9,11 +9,11 @@ public class GizmosMona : MonoBehaviour
     {
         Mona.MonaReactor reactor = transform.GetComponent<Mona.MonaReactor>();
         Mona.PlayerPropertiesVolume ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
-        
+
         if (reactor == null && ppv == null) return;
 
-
-        if (reactor != null){
+        if (reactor != null)
+        {
             Gizmos.color = Color.magenta * 0.6f;
 
             // Draw a arrow towards the reactor's target
@@ -55,7 +55,8 @@ public class GizmosMona : MonoBehaviour
             Gizmos.DrawIcon(transform.position, "Reactor", true);
         }
 
-        if(ppv != null){
+        if (ppv != null)
+        {
 
             Gizmos.color = Color.yellow * 0.6f;
 
