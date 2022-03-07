@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace Mona
 {
-    public class QAEditor : EditorWindow
+    public class QualityAssuranceEditor : EditorWindow
     {
         Vector2 Scroll;
 
@@ -13,14 +13,14 @@ namespace Mona
         public static void Init()
         {
 
-            QAEditor _window = (QAEditor)EditorWindow.GetWindow(typeof(QAEditor));
+            QualityAssuranceEditor _window = (QualityAssuranceEditor)EditorWindow.GetWindow(typeof(QualityAssuranceEditor));
 
             // Set Editor title
             _window.titleContent = new GUIContent("Quality Assurance");
 
             _window.Show();
 
-            QualityAssurance.CheckQuality();
+            QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
         }
 
         void OnGUI()
@@ -69,11 +69,10 @@ namespace Mona
                 GUILayout.EndHorizontal();
                 GUILayout.Space(1);
 
-                foreach (string[] error in QualityAssurance.SpaceErrors)
+                foreach (string _error in QualityAssurance.SpaceErrors)
                 {
-                    GUILayout.Box("  ⚠️  " + error[0], _style, GUILayout.MinWidth(100));
+                    GUILayout.Box("  ⚠️  " + _error, _style, GUILayout.MinWidth(100));
                     GUILayout.BeginHorizontal("box");
-                    GUILayout.Label("└ " + error[1]);
                     GUILayout.EndHorizontal();
                 }
             }
@@ -82,7 +81,7 @@ namespace Mona
 
             if (GUILayout.Button("Run Quality Test", _button1))
             {
-                QualityAssurance.CheckQuality();
+                QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
             }
 
             GUILayout.EndScrollView();
