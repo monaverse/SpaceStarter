@@ -71,8 +71,15 @@ namespace Mona
 
                 foreach (string _error in QualityAssurance.SpaceErrors)
                 {
-                    GUILayout.Box("  ⚠️  " + _error, _style, GUILayout.MinWidth(100));
+                    GUILayout.Space(10);
+                    
+                    string title = _error.Replace(".", " ");
+                    title = title.Replace("-", " ");
+                    title = title.Substring(0, 1).ToUpper() + title.Substring(1);
+
+                    GUILayout.Box("  ⚠️  " + title, _style, GUILayout.MinWidth(100));
                     GUILayout.BeginHorizontal("box");
+                    GUILayout.Label("└-- " + QualityAssurance.GetErrorDescription(_error));
                     GUILayout.EndHorizontal();
                 }
             }
