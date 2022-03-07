@@ -21,7 +21,7 @@ namespace Mona
         [Tooltip("The speed at which the player moves when sprinting")]
         public float SprintSpeed = 10f;
 
-        // The post processing strength of the bloom effect
+        // The post processing strength of the Bloom effect
         public bool OverrideBloom = false;
         [Tooltip("The post processing strength of the bloom effect")]
         public float Bloom = 0f;
@@ -31,7 +31,7 @@ namespace Mona
         [Tooltip("The post processing strength of the Chromatic Aberration effect")]
         public float ChromaticAberration = 0f;
 
-        // The post processing strength of the vignette MotionBlur
+        // The post processing strength of the MotionBlur
         public bool OverrideMotionBlur = false;
         [Tooltip("The post processing strength of the MotionBlur")]
         public float MotionBlur = 0f;
