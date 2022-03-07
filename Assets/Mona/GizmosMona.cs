@@ -5,60 +5,67 @@ using UnityEditor;
 public class GizmosMona : MonoBehaviour
 {
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
-    static void drawReactor(Transform transform, GizmoType gizmoType)
+    static void DrawSceneObjects(Transform transform, GizmoType gizmoType)
     {
         Mona.MonaReactor reactor = transform.GetComponent<Mona.MonaReactor>();
-        if (reactor == null)
-        {
-            return;
-        }
+        Mona.PlayerPropertiesVolume ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
+        
+        if (reactor == null && ppv == null) return;
 
-        Gizmos.color = Color.magenta * 0.6f;
 
-        // Draw a arrow towards the reactor's target
-        if (reactor.OnEnterTrigger != null)
-        {
-            if (reactor.OnEnterTrigger.Length != 0)
+        if (reactor != null){
+            Gizmos.color = Color.magenta * 0.6f;
+
+            // Draw a arrow towards the reactor's target
+            if (reactor.OnEnterTrigger != null)
             {
-                for (int i = 0; i < reactor.OnEnterTrigger.Length; i++)
+                if (reactor.OnEnterTrigger.Length != 0)
                 {
-                    GameObject rObject = reactor.OnEnterTrigger[i].Object;
-                    if (rObject != null)
+                    for (int i = 0; i < reactor.OnEnterTrigger.Length; i++)
                     {
-                        // Draw a line to the object and the reactor
-                        Gizmos.DrawLine(transform.position, rObject.transform.position);
-                        Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
+                        GameObject rObject = reactor.OnEnterTrigger[i].Object;
+                        if (rObject != null)
+                        {
+                            // Draw a line to the object and the reactor
+                            Gizmos.DrawLine(transform.position, rObject.transform.position);
+                            Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
+                        }
                     }
                 }
             }
-        }
 
-        if (reactor.OnExitTrigger != null)
-        {
-            if (reactor.OnExitTrigger.Length != 0)
+            if (reactor.OnExitTrigger != null)
             {
-                for (int i = 0; i < reactor.OnExitTrigger.Length; i++)
+                if (reactor.OnExitTrigger.Length != 0)
                 {
-                    GameObject rObject = reactor.OnExitTrigger[i].Object;
-                    if (rObject != null)
+                    for (int i = 0; i < reactor.OnExitTrigger.Length; i++)
                     {
-                        // Draw a line to the object and the reactor
-                        Gizmos.DrawLine(transform.position, rObject.transform.position);
-                        Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
+                        GameObject rObject = reactor.OnExitTrigger[i].Object;
+                        if (rObject != null)
+                        {
+                            // Draw a line to the object and the reactor
+                            Gizmos.DrawLine(transform.position, rObject.transform.position);
+                            Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
+                        }
                     }
                 }
             }
+
+            // Draw icon from Resources folder
+            Gizmos.DrawIcon(transform.position, "Reactor", true);
         }
 
-        // Draw icon from Resources folder
-        var icon = Resources.Load("Editor/Reactor") as Texture2D;
-        Gizmos.DrawIcon(transform.position, "Reactor", true);
+        if(ppv != null){
+
+            Gizmos.color = Color.yellow * 0.6f;
+
+            Gizmos.DrawIcon(transform.position, "PPV", true);
+        }
 
         // Draw the outline of the box collider
         var collider = transform.GetComponent<BoxCollider>();
         if (collider != null)
         {
-            Gizmos.color = Color.magenta * 0.4f;
             Gizmos.DrawWireCube(collider.center + transform.position, collider.size);
         }
 
