@@ -32,7 +32,6 @@ namespace Mona
             TestNameUniqueness("Canvas", MonaErrorCodes.DUPLICATE_CANVAS_NAME);
             TestNameUniqueness("Portal", MonaErrorCodes.DUPLICATE_PORTAL_NAME);
 
-            // TestLayerContents("ArtifactLayer", new string[] { "Canvas", "Artifact" }, MonaErrorCodes.BAD_ARTIFACT_LAYER_CONTENTS);
             TestLayerContents("PortalLayer", "Portal", MonaErrorCodes.BAD_PORTAL_LAYER_CONTENTS);
 
             TestObjectColliders<MeshCollider>("Canvas", MonaErrorCodes.BAD_CANVAS_COLLIDER);
