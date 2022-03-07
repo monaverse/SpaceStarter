@@ -16,37 +16,28 @@ public class GizmosMona : MonoBehaviour
         {
             Gizmos.color = Color.magenta * 0.6f;
 
-            // Draw a arrow towards the reactor's target
             if (reactor.OnEnterTrigger != null)
             {
-                if (reactor.OnEnterTrigger.Length != 0)
+                foreach (Mona.MonaEvent _monaEvent in reactor.OnEnterTrigger)
                 {
-                    for (int i = 0; i < reactor.OnEnterTrigger.Length; i++)
+                    if (_monaEvent.Object != null)
                     {
-                        GameObject rObject = reactor.OnEnterTrigger[i].Object;
-                        if (rObject != null)
-                        {
-                            // Draw a line to the object and the reactor
-                            Gizmos.DrawLine(transform.position, rObject.transform.position);
-                            Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
-                        }
+                        // Draw a line to the object and the reactor
+                        Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
+                        Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
                     }
                 }
             }
 
             if (reactor.OnExitTrigger != null)
             {
-                if (reactor.OnExitTrigger.Length != 0)
+                foreach (Mona.MonaEvent _monaEvent in reactor.OnExitTrigger)
                 {
-                    for (int i = 0; i < reactor.OnExitTrigger.Length; i++)
+                    if (_monaEvent.Object != null)
                     {
-                        GameObject rObject = reactor.OnExitTrigger[i].Object;
-                        if (rObject != null)
-                        {
-                            // Draw a line to the object and the reactor
-                            Gizmos.DrawLine(transform.position, rObject.transform.position);
-                            Gizmos.DrawIcon(rObject.transform.position, "hooked", true);
-                        }
+                        // Draw a line to the object and the reactor
+                        Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
+                        Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
                     }
                 }
             }
@@ -55,13 +46,8 @@ public class GizmosMona : MonoBehaviour
             Gizmos.DrawIcon(transform.position, "Reactor", true);
         }
 
-        if (ppv != null)
-        {
-
-            Gizmos.color = Color.yellow * 0.6f;
-
-            Gizmos.DrawIcon(transform.position, "PPV", true);
-        }
+        Gizmos.color = Color.yellow * 0.6f;
+        Gizmos.DrawIcon(transform.position, "PPV", true);
 
         // Draw the outline of the box collider
         var collider = transform.GetComponent<BoxCollider>();
@@ -69,7 +55,6 @@ public class GizmosMona : MonoBehaviour
         {
             Gizmos.DrawWireCube(collider.center + transform.position, collider.size);
         }
-
 
     }
 
