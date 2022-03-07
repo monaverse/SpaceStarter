@@ -72,7 +72,7 @@ namespace Mona
                 foreach (string _error in QualityAssurance.SpaceErrors)
                 {
                     GUILayout.Space(10);
-                    
+
                     string title = _error.Replace(".", " ");
                     title = title.Replace("-", " ");
                     title = title.Substring(0, 1).ToUpper() + title.Substring(1);

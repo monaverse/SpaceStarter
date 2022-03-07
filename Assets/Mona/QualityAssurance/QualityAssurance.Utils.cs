@@ -36,16 +36,18 @@ namespace Mona
             return null;
         }
 
-        public static void InitDescriptions(){
-            if(ErrorDescriptionMap != null) return;
+        public static void InitDescriptions()
+        {
+            if (ErrorDescriptionMap != null) return;
             ErrorDescriptionMap = MonaErrorCodes.GetErrorDescriptionMap();
         }
 
-        public static string GetErrorDescription(string error){
+        public static string GetErrorDescription(string error)
+        {
             InitDescriptions();
 
-            if(!ErrorDescriptionMap.ContainsKey(error)) return "";
-            
+            if (!ErrorDescriptionMap.ContainsKey(error)) return "";
+
             return ErrorDescriptionMap[error];
 
         }
