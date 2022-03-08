@@ -16,25 +16,8 @@ public class GizmosMona : MonoBehaviour
         {
             Gizmos.color = Color.magenta * 0.6f;
 
-            foreach (Mona.MonaEvent _monaEvent in _reactor.OnEnterTrigger)
-            {
-                if (_monaEvent.Object != null)
-                {
-                    // Draw a line to the object and the reactor
-                    Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
-                    Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
-                }
-            }
-
-            foreach (Mona.MonaEvent _monaEvent in _reactor.OnExitTrigger)
-            {
-                if (_monaEvent.Object != null)
-                {
-                    // Draw a line to the object and the reactor
-                    Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
-                    Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
-                }
-            }
+            DrawHooks(_reactor.OnEnterTrigger, transform);
+            DrawHooks(_reactor.OnExitTrigger, transform);
 
             // Draw icon from Resources folder
             Gizmos.DrawIcon(transform.position, "Reactor", true);
@@ -146,6 +129,20 @@ public class GizmosMona : MonoBehaviour
         //draw center
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);
+    }
+    
+    // Draws all connections between MonaReactors
+    static void DrawHooks(Mona.MonaEvent[] events, Transform transform)
+    {
+        foreach (Mona.MonaEvent _monaEvent in events)
+        {
+            if (_monaEvent.Object != null)
+            {
+                // Draw a line to the object and the reactor
+                Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
+                Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
+            }
+        }
     }
 }
 #endif
