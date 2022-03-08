@@ -4,7 +4,10 @@ namespace Mona
 {
     [System.Serializable]
     public class PlayerProperties
-    {
+    {   
+        [HideInInspector]
+        public int PropertiesVersion = 1;
+
         // Fall speed of players in this volume
         [Tooltip("Fall speed of players in this volume")]
         public Vector3 Gravity = new Vector3(0, -15f, 0);

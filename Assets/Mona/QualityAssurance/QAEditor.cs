@@ -38,23 +38,15 @@ namespace Mona
             GUIStyle _button1 = GUI.skin.button;
             _button1.fontSize = 16;
             _button1.margin = new RectOffset(30, 30, 10, 10);
-            //button1.fixedHeight = 30;
 
             GUIStyle _style = new GUIStyle();
             _style.fontSize = 15;
             _font.wordWrap = true;
 
-            Texture2D _tex = new Texture2D(1, 1);
-            _tex.SetPixel(0, 0, new Color(1f, 0.0f, 0.0f, 1.0f));
-            _style.normal.background = _tex;
 
             GUILayout.BeginHorizontal("", _style);
-            GUILayout.Space(10);
-            GUILayout.Label("Mona Quality Assurance", _font);
+            
             GUILayout.EndHorizontal();
-
-            // Enable wrapping text
-
 
             if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
             {
