@@ -37,7 +37,6 @@ namespace Mona
 
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
             {
-                // Run QA
                 QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
 
                 if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
@@ -49,14 +48,12 @@ namespace Mona
                 }
                 else
                 {
-                    // Open the QA window
                     QualityAssuranceEditor.Init();
                 }
             }
 
             if (GUILayout.Button(new GUIContent("▲ QA", "QA")))
             {
-                // Open the QA window
                 QualityAssuranceEditor.Init();
             }
             GUI.color = Color.white;

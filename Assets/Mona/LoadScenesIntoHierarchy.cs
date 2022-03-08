@@ -1,12 +1,9 @@
 #if UNITY_EDITOR
 
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using System;
-using System.Linq;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Mona
 {
@@ -15,21 +12,23 @@ namespace Mona
         [MenuItem("Mona/Load Space Scenes")]
         static void LoadScenesIntoHierarchyHandler()
         {
-            var initialScene = EditorSceneManager.GetSceneAt(0);
-            EditorSceneManager.CloseScene(initialScene, true);
-            List<string> sceneList = new List<string>()
+            Scene _initialScene = EditorSceneManager.GetSceneAt(0);
+            EditorSceneManager.CloseScene(_initialScene, true);
+            
+            List<string> _sceneList = new List<string>()
             {
                 Constants.SpacePath,
                 Constants.PortalsPath,
                 Constants.ArtifactsPath
             };
             
-            foreach (string scene in sceneList)
+            foreach (string _scene in _sceneList)
             {
-                EditorSceneManager.OpenScene(scene, OpenSceneMode.Additive);
+                EditorSceneManager.OpenScene(_scene, OpenSceneMode.Additive);
             }
-            var spaceScene = EditorSceneManager.GetSceneByName("Space");
-            EditorSceneManager.SetActiveScene(spaceScene);
+
+            Scene _spaceScene = EditorSceneManager.GetSceneByName("Space");
+            EditorSceneManager.SetActiveScene(_spaceScene);
         }
     }
 }

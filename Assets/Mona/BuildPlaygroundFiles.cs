@@ -1,11 +1,5 @@
 #if UNITY_EDITOR
-using UnityEngine;
 using UnityEditor;
-using UnityEditor.SceneManagement;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Mona
 {
