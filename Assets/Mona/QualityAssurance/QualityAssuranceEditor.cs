@@ -12,12 +12,9 @@ namespace Mona
         [MenuItem("Mona/Quality Assurance")]
         public static void Init()
         {
-
             QualityAssuranceEditor _window = (QualityAssuranceEditor)EditorWindow.GetWindow(typeof(QualityAssuranceEditor));
 
-            // Set Editor title
             _window.titleContent = new GUIContent("Quality Assurance");
-
             _window.Show();
 
             QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
@@ -27,62 +24,48 @@ namespace Mona
         {
             Scroll = GUILayout.BeginScrollView(Scroll, false, false);
 
-            GUIStyle _font = new GUIStyle();
-            _font.fontSize = 20;
-            _font.wordWrap = true;
+            GUIStyle _buttonStyle = GUI.skin.button;
+            _buttonStyle.margin = new RectOffset(30, 30, 10, 10);
 
-            GUIStyle _font2 = new GUIStyle();
-            _font.fontSize = 15;
-            _font.wordWrap = true;
-
-            GUIStyle _button1 = GUI.skin.button;
-            _button1.fontSize = 16;
-            _button1.margin = new RectOffset(30, 30, 10, 10);
-
-            GUIStyle _style = new GUIStyle();
-            _style.fontSize = 15;
-            _font.wordWrap = true;
-
-
-            GUILayout.BeginHorizontal("", _style);
-            
+            GUILayout.BeginHorizontal();
+            Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa.png", typeof(Texture));
+            GUI.DrawTexture(new Rect(0, 0, 498, 66), banner, ScaleMode.ScaleToFit, false);
             GUILayout.EndHorizontal();
+            GUILayout.Space(64);
 
             if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
             {
-                GUILayout.Space(1);
-                GUILayout.Box("  √ No errors found.", _style, GUILayout.MinWidth(100));
+                GUILayout.BeginHorizontal("box");
+                GUILayout.Label("√ No errors found.");
+                GUILayout.EndHorizontal();
             }
             else
             {
-                GUILayout.BeginHorizontal("", _style, GUILayout.MinHeight(30));
-                GUILayout.Space(10);
-                GUILayout.TextArea("There are some issues in your space that needs to be fixed before minting can be approved.", _font2);
-                GUILayout.EndHorizontal();
-                GUILayout.Space(1);
+                Texture _errIcon = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa_err.png", typeof(Texture));
+                GUI.DrawTexture(new Rect(10, 10, 48, 48), _errIcon, ScaleMode.ScaleAndCrop, false);
 
                 foreach (string _error in QualityAssurance.SpaceErrors)
                 {
-                    GUILayout.Space(10);
+                    GUILayout.Space(1);
 
-                    string title = _error.Replace(".", " ");
-                    title = title.Replace("-", " ");
-                    title = title.Substring(0, 1).ToUpper() + title.Substring(1);
+                    string _title = _error.Replace(".", " ");
+                    _title = _title.Replace("-", " ");
+                    _title = _title.Substring(0, 1).ToUpper() + _title.Substring(1);
 
-                    GUILayout.Box("  ⚠️  " + title, _style, GUILayout.MinWidth(100));
                     GUILayout.BeginHorizontal("box");
-                    GUILayout.Label("└-- " + QualityAssurance.GetErrorDescription(_error));
+                    GUILayout.Box(_title, GUILayout.MinWidth(100));
+                    GUILayout.Label(QualityAssurance.GetErrorDescription(_error));
                     GUILayout.EndHorizontal();
                 }
             }
 
-            GUILayout.Space(10);
-
-            if (GUILayout.Button("Run Quality Test", _button1))
+            GUILayout.Space(1);
+            GUILayout.BeginHorizontal("box");
+            if (GUILayout.Button("Run Quality Test", _buttonStyle))
             {
                 QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
             }
-
+            GUILayout.EndHorizontal();
             GUILayout.EndScrollView();
         }
     }
