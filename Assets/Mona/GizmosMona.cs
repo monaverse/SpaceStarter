@@ -7,38 +7,32 @@ public class GizmosMona : MonoBehaviour
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
     static void DrawSceneObjects(Transform transform, GizmoType gizmoType)
     {
-        Mona.MonaReactor reactor = transform.GetComponent<Mona.MonaReactor>();
-        Mona.PlayerPropertiesVolume ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
+        Mona.MonaReactor _reactor = transform.GetComponent<Mona.MonaReactor>();
+        Mona.PlayerPropertiesVolume _ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
 
-        if (reactor == null && ppv == null) return;
+        if (_reactor == null && _ppv == null) return;
 
-        if (reactor != null)
+        if (_reactor != null)
         {
             Gizmos.color = Color.magenta * 0.6f;
 
-            if (reactor.OnEnterTrigger != null)
+            foreach (Mona.MonaEvent _monaEvent in _reactor.OnEnterTrigger)
             {
-                foreach (Mona.MonaEvent _monaEvent in reactor.OnEnterTrigger)
+                if (_monaEvent.Object != null)
                 {
-                    if (_monaEvent.Object != null)
-                    {
-                        // Draw a line to the object and the reactor
-                        Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
-                        Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
-                    }
+                    // Draw a line to the object and the reactor
+                    Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
+                    Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
                 }
             }
 
-            if (reactor.OnExitTrigger != null)
+            foreach (Mona.MonaEvent _monaEvent in _reactor.OnExitTrigger)
             {
-                foreach (Mona.MonaEvent _monaEvent in reactor.OnExitTrigger)
+                if (_monaEvent.Object != null)
                 {
-                    if (_monaEvent.Object != null)
-                    {
-                        // Draw a line to the object and the reactor
-                        Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
-                        Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
-                    }
+                    // Draw a line to the object and the reactor
+                    Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
+                    Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
                 }
             }
 
@@ -50,50 +44,44 @@ public class GizmosMona : MonoBehaviour
         Gizmos.DrawIcon(transform.position, "PPV", true);
 
         // Draw the outline of the box collider
-        var collider = transform.GetComponent<BoxCollider>();
-        if (collider != null)
-        {
-            Gizmos.DrawWireCube(collider.center + transform.position, collider.size);
-        }
+        BoxCollider _collider = transform.GetComponent<BoxCollider>();
+        if (_collider != null) return;
+        Gizmos.DrawWireCube(_collider.center + transform.position, _collider.size);
 
     }
 
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
-    static void drawGizmo(Transform transform, GizmoType gizmoType)
+    static void DrawGizmo(Transform transform, GizmoType gizmoType)
     {
-
-        if (transform.tag != "SpawnPoint" || transform.gameObject.scene.name.Equals("Artifacts"))
-        {
-            return;
-        }
+        if (transform.tag != "SpawnPoint" || transform.gameObject.scene.name.Equals("Artifacts")) return;
 
         // Raycast check if ground is valid
-        bool spawnNotOK = false;
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1000f))
+        bool _spawnNotOK = false;
+        RaycastHit _hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out _hit, 1000f))
         {
-            if (hit.collider.gameObject.layer != 0)
+            if (_hit.collider.gameObject.layer != 0)
             {
-                spawnNotOK = true;
+                _spawnNotOK = true;
             }
             else
             {
                 Handles.color = Color.green;
                 Gizmos.color = Color.green;
-                Handles.DrawWireDisc(hit.point, Vector3.up, 0.5f);
-                Gizmos.DrawLine(transform.position, hit.point);
+                Handles.DrawWireDisc(_hit.point, Vector3.up, 0.5f);
+                Gizmos.DrawLine(transform.position, _hit.point);
             }
         }
         else
         {
-            spawnNotOK = true;
+            _spawnNotOK = true;
             Handles.color = Color.red;
         }
 
         // Check capsule collision so we don't spawn inside a wall
         if (Physics.CheckCapsule(transform.position + Vector3.up * 0.28f, transform.position + Vector3.up * 1.58f, 0.28f))
         {
-            spawnNotOK = true;
+            _spawnNotOK = true;
         }
 
         if (transform.gameObject.scene.name.Equals("Space"))
@@ -105,7 +93,7 @@ public class GizmosMona : MonoBehaviour
             Gizmos.color = Color.green * 0.7f;
         }
 
-        if (spawnNotOK)
+        if (_spawnNotOK)
         {
             Handles.color = Color.red;
             Gizmos.color = Color.red;
@@ -119,15 +107,16 @@ public class GizmosMona : MonoBehaviour
         );
 
         // Draw capsule
-        if (!spawnNotOK)
+        if (!_spawnNotOK)
         {
             Handles.color = Color.blue;
         }
-        float offset = 0.93f;
-        float height = 0.65f;
+
+        float _offset = 0.93f;
+        float _height = 0.65f;
         Vector3 pos = transform.position;
-        pos.y += offset;
-        DrawWireCapsule(pos + new Vector3(0, height, 0), pos - new Vector3(0, height, 0), 0.28f);
+        pos.y += _offset;
+        DrawWireCapsule(pos + new Vector3(0, _height, 0), pos - new Vector3(0, _height, 0), 0.28f);
 
         // Draw yellow line arrow
         Gizmos.color = Color.magenta;
@@ -139,21 +128,21 @@ public class GizmosMona : MonoBehaviour
 
     static void DrawWireCapsule(Vector3 upper, Vector3 lower, float radius)
     {
-
-        var offsetCenter = Vector3.Distance(upper, lower);
-        var offsetX = new Vector3(radius, 0f, 0f);
-        var offsetZ = new Vector3(0f, 0f, radius);
+        Vector3 _offsetX = new Vector3(radius, 0f, 0f);
+        Vector3 _offsetZ = new Vector3(0f, 0f, radius);
 
         //draw frontways
         Handles.DrawWireArc(upper, Vector3.back, Vector3.left, 180, radius);
-        Handles.DrawLine(lower + offsetX, upper + offsetX);
-        Handles.DrawLine(lower - offsetX, upper - offsetX);
+        Handles.DrawLine(lower + _offsetX, upper + _offsetX);
+        Handles.DrawLine(lower - _offsetX, upper - _offsetX);
         Handles.DrawWireArc(lower, Vector3.back, Vector3.left, -180, radius);
+
         //draw sideways
         Handles.DrawWireArc(upper, Vector3.left, Vector3.back, -180, radius);
-        Handles.DrawLine(lower + offsetZ, upper + offsetZ);
-        Handles.DrawLine(lower - offsetZ, upper - offsetZ);
+        Handles.DrawLine(lower + _offsetZ, upper + _offsetZ);
+        Handles.DrawLine(lower - _offsetZ, upper - _offsetZ);
         Handles.DrawWireArc(lower, Vector3.left, Vector3.back, 180, radius);
+
         //draw center
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);

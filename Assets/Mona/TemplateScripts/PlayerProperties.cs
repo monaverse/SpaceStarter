@@ -7,7 +7,7 @@ namespace Mona
     {
         // Fall speed of players in this volume
         [Tooltip("Fall speed of players in this volume")]
-        public float Gravity = -15f;
+        public Vector3 Gravity = new Vector3(0, -15f, 0);
 
         // The upward force applied to the player when jumping
         [Tooltip("The upward force applied to the player when jumping")]
