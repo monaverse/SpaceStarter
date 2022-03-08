@@ -41,13 +41,13 @@ namespace Mona
 
             if (rootObjects.Length > 1)
             {
-                foreach (var @object in rootObjects)
+                foreach (var rootObject in rootObjects)
                 {
                     if (
-                        !@object.tag.Equals(layerTag)
-                        && !@object.name.StartsWith("!ftraceLightmaps")
-                        && !@object.name.Equals("PDC")
-                        && @object.activeSelf
+                        !rootObject.tag.Equals(layerTag)
+                        && !rootObject.name.StartsWith("!ftraceLightmaps")
+                        && !rootObject.name.Equals("PDC")
+                        && rootObject.activeSelf
                     )
                     {
                         SpaceErrors.Add(multipleRootError);
