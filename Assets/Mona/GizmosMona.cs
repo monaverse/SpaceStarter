@@ -100,13 +100,6 @@ public class GizmosMona : MonoBehaviour
         Vector3 pos = transform.position;
         pos.y += _offset;
         DrawWireCapsule(pos + new Vector3(0, _height, 0), pos - new Vector3(0, _height, 0), 0.28f);
-
-        // Draw yellow line arrow
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(pos, pos + transform.forward * 0.7f);
-        Gizmos.DrawLine(pos + transform.right * 0.3f + transform.forward * 0.4f, pos + transform.forward * 0.7f);
-        Gizmos.DrawLine(pos + transform.right * -0.3f + transform.forward * 0.4f, pos + transform.forward * 0.7f);
-
     }
 
     static void DrawWireCapsule(Vector3 upper, Vector3 lower, float radius)
