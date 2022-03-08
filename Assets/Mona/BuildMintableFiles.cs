@@ -12,26 +12,26 @@ namespace Mona
             Helpers.UpsertExportsDirectory();
             BuildPlaygroundFiles.BuildPlaygroundFilesHandler();
 
-            List<string> _sceneList = new List<string>()
+            List<string> sceneList = new List<string>()
             {
                 Constants.SpacePath,
                 Constants.PortalsPath,
                 Constants.ArtifactsPath
             };
 
-            List<string> _exportsList = new List<string>();
+            List<string> exportsList = new List<string>();
 
-            foreach (string _scene in _sceneList)
+            foreach (string scene in sceneList)
             {
-                _exportsList.Add(_scene);
-                string[] _sceneDependencies = AssetDatabase.GetDependencies(_scene, true);
-                foreach (string _dependency in _sceneDependencies)
+                exportsList.Add(scene);
+                string[] sceneDependencies = AssetDatabase.GetDependencies(scene, true);
+                foreach (string dependency in sceneDependencies)
                 {
-                    _exportsList.Add(_dependency);
+                    exportsList.Add(dependency);
                 }
             }
 
-            AssetDatabase.ExportPackage(_exportsList.ToArray(), Constants.MintingFile, ExportPackageOptions.Recurse);
+            AssetDatabase.ExportPackage(exportsList.ToArray(), Constants.MintingFile, ExportPackageOptions.Recurse);
             Helpers.OpenDirectory(Constants.ExportsDirectory);
         }
     }

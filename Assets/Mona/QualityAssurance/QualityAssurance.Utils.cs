@@ -13,25 +13,25 @@ namespace Mona
         // Recursively check all gameobjects and their children's children
         public static GameObject[] GetAllChildren(GameObject parent)
         {
-            List<GameObject> _children = new List<GameObject>();
-            foreach (Transform _child in parent.transform)
+            List<GameObject> children = new List<GameObject>();
+            foreach (Transform child in parent.transform)
             {
-                _children.Add(_child.gameObject);
-                _children.AddRange(GetAllChildren(_child.gameObject));
+                children.Add(child.gameObject);
+                children.AddRange(GetAllChildren(child.gameObject));
             }
-            return _children.ToArray();
+            return children.ToArray();
         }
 
         public static GameObject FindParentWithTag(String tagToFind, GameObject startingObject)
         {
-            var _parent = startingObject.transform.parent;
-            while (_parent != null)
+            var parent = startingObject.transform.parent;
+            while (parent != null)
             {
-                if (_parent.tag == tagToFind)
+                if (parent.tag == tagToFind)
                 {
-                    return _parent.gameObject as GameObject;
+                    return parent.gameObject as GameObject;
                 }
-                _parent = _parent.transform.parent;
+                parent = parent.transform.parent;
             }
             return null;
         }

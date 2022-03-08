@@ -12,10 +12,10 @@ namespace Mona
         [MenuItem("Mona/Quality Assurance")]
         public static void Init()
         {
-            QualityAssuranceEditor _window = (QualityAssuranceEditor)EditorWindow.GetWindow(typeof(QualityAssuranceEditor));
+            QualityAssuranceEditor window = (QualityAssuranceEditor)EditorWindow.GetWindow(typeof(QualityAssuranceEditor));
 
-            _window.titleContent = new GUIContent("Quality Assurance");
-            _window.Show();
+            window.titleContent = new GUIContent("Quality Assurance");
+            window.Show();
 
             QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
         }
@@ -24,8 +24,8 @@ namespace Mona
         {
             Scroll = GUILayout.BeginScrollView(Scroll, false, false);
 
-            GUIStyle _buttonStyle = GUI.skin.button;
-            _buttonStyle.margin = new RectOffset(30, 30, 10, 10);
+            GUIStyle buttonStyle = GUI.skin.button;
+            buttonStyle.margin = new RectOffset(30, 30, 10, 10);
 
             GUILayout.BeginHorizontal();
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa.png", typeof(Texture));
@@ -41,24 +41,24 @@ namespace Mona
             }
             else
             {
-                foreach (string _error in QualityAssurance.SpaceErrors)
+                foreach (string error in QualityAssurance.SpaceErrors)
                 {
                     GUILayout.Space(1);
 
-                    string _title = _error.Replace(".", " ");
-                    _title = _title.Replace("-", " ");
-                    _title = _title.Substring(0, 1).ToUpper() + _title.Substring(1);
+                    string title = error.Replace(".", " ");
+                    title = title.Replace("-", " ");
+                    title = title.Substring(0, 1).ToUpper() + title.Substring(1);
 
                     GUILayout.BeginHorizontal("box");
-                    GUILayout.Box(_title, GUILayout.MinWidth(100));
-                    GUILayout.Label(QualityAssurance.GetErrorDescription(_error));
+                    GUILayout.Box(title, GUILayout.MinWidth(100));
+                    GUILayout.Label(QualityAssurance.GetErrorDescription(error));
                     GUILayout.EndHorizontal();
                 }
             }
 
             GUILayout.Space(1);
             GUILayout.BeginHorizontal("box");
-            if (GUILayout.Button("Run Quality Test", _buttonStyle))
+            if (GUILayout.Button("Run Quality Test", buttonStyle))
             {
                 QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
             }

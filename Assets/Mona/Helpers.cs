@@ -32,11 +32,11 @@ namespace Mona
 
         public static void OpenDirectory(string directory)
         {
-            List<string> _list = new List<string>(Application.dataPath.Split('/'));
-            _list.RemoveAt(_list.Count - 1);
+            List<string> list = new List<string>(Application.dataPath.Split('/'));
+            list.RemoveAt(list.Count - 1);
 
-            string _directoryPath = string.Join("/", _list.ToArray()) + "/" + directory;
-            Application.OpenURL("file://" + _directoryPath);
+            string directoryPath = string.Join("/", list.ToArray()) + "/" + directory;
+            Application.OpenURL("file://" + directoryPath);
         }
     }
 }

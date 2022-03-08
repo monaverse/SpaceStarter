@@ -19,32 +19,32 @@ public class GizmosMona : MonoBehaviour
         if (transform.tag != "SpawnPoint" || transform.gameObject.scene.name.Equals("Artifacts")) return;
 
         // Raycast check if ground is valid
-        bool _spawnNotOK = false;
-        RaycastHit _hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out _hit, 1000f))
+        bool spawnNotOK = false;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1000f))
         {
-            if (_hit.collider.gameObject.layer != 0)
+            if (hit.collider.gameObject.layer != 0)
             {
-                _spawnNotOK = true;
+                spawnNotOK = true;
             }
             else
             {
                 Handles.color = Color.green;
                 Gizmos.color = Color.green;
-                Handles.DrawWireDisc(_hit.point, Vector3.up, 0.5f);
-                Gizmos.DrawLine(transform.position, _hit.point);
+                Handles.DrawWireDisc(hit.point, Vector3.up, 0.5f);
+                Gizmos.DrawLine(transform.position, hit.point);
             }
         }
         else
         {
-            _spawnNotOK = true;
+            spawnNotOK = true;
             Handles.color = Color.red;
         }
 
         // Check capsule collision so we don't spawn inside a wall
         if (Physics.CheckCapsule(transform.position + Vector3.up * 0.28f, transform.position + Vector3.up * 1.58f, 0.28f))
         {
-            _spawnNotOK = true;
+            spawnNotOK = true;
         }
 
         if (transform.gameObject.scene.name.Equals("Space"))
@@ -56,7 +56,7 @@ public class GizmosMona : MonoBehaviour
             Gizmos.color = Color.green * 0.7f;
         }
 
-        if (_spawnNotOK)
+        if (spawnNotOK)
         {
             Handles.color = Color.red;
             Gizmos.color = Color.red;
@@ -70,28 +70,28 @@ public class GizmosMona : MonoBehaviour
         );
 
         // Draw capsule
-        if (!_spawnNotOK)
+        if (!spawnNotOK)
         {
             Handles.color = Color.blue;
         }
 
-        float _offset = 0.93f;
-        float _height = 0.65f;
+        float offset = 0.93f;
+        float height = 0.65f;
         Vector3 pos = transform.position;
-        pos.y += _offset;
-        DrawWireCapsule(pos + new Vector3(0, _height, 0), pos - new Vector3(0, _height, 0), 0.28f);
+        pos.y += offset;
+        DrawWireCapsule(pos + new Vector3(0, height, 0), pos - new Vector3(0, height, 0), 0.28f);
     }
 
     // Draws the reactor
     static void DrawReactor(Transform transform, GizmoType gizmoType)
     {
-        Mona.MonaReactor _reactor = transform.GetComponent<Mona.MonaReactor>();
-        if (_reactor == null) return;
+        Mona.MonaReactor reactor = transform.GetComponent<Mona.MonaReactor>();
+        if (reactor == null) return;
 
         Gizmos.color = Color.magenta * 0.6f;
 
-        DrawHooks(_reactor.OnEnterTrigger, transform);
-        DrawHooks(_reactor.OnExitTrigger, transform);
+        DrawHooks(reactor.OnEnterTrigger, transform);
+        DrawHooks(reactor.OnExitTrigger, transform);
 
         Gizmos.DrawIcon(transform.position, "Reactor", true);
         DrawWireBox(transform);
@@ -100,8 +100,8 @@ public class GizmosMona : MonoBehaviour
     // Draws the properties volumes
     static void DrawPlayerPropertiesVolume(Transform transform, GizmoType gizmoType)
     {
-        Mona.PlayerPropertiesVolume _ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
-        if (_ppv == null) return;
+        Mona.PlayerPropertiesVolume ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
+        if (ppv == null) return;
 
         Gizmos.color = Color.yellow * 0.6f;
         Gizmos.DrawIcon(transform.position, "PPV", true);
@@ -112,40 +112,40 @@ public class GizmosMona : MonoBehaviour
     // Draws all connections between MonaReactors
     static void DrawHooks(Mona.MonaEvent[] events, Transform transform)
     {
-        foreach (Mona.MonaEvent _monaEvent in events)
+        foreach (Mona.MonaEvent monaEvent in events)
         {
-            if (_monaEvent.Object == null) continue;
+            if (monaEvent.Object == null) continue;
 
-            Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
-            Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
+            Gizmos.DrawLine(transform.position, monaEvent.Object.transform.position);
+            Gizmos.DrawIcon(monaEvent.Object.transform.position, "hooked", true);
         }
     }
 
     // Draw the outline of the box collider
     static void DrawWireBox(Transform transform)
     {
-        BoxCollider _collider = transform.GetComponent<BoxCollider>();
+        BoxCollider collider = transform.GetComponent<BoxCollider>();
 
-        if (_collider == null) return;
-        Gizmos.DrawWireCube(_collider.center + transform.position, _collider.size);
+        if (collider == null) return;
+        Gizmos.DrawWireCube(collider.center + transform.position, collider.size);
     }
 
     // Draw capsule collider
     static void DrawWireCapsule(Vector3 upper, Vector3 lower, float radius)
     {
-        Vector3 _offsetX = new Vector3(radius, 0f, 0f);
-        Vector3 _offsetZ = new Vector3(0f, 0f, radius);
+        Vector3 offsetX = new Vector3(radius, 0f, 0f);
+        Vector3 offsetZ = new Vector3(0f, 0f, radius);
 
         //draw frontways
         Handles.DrawWireArc(upper, Vector3.back, Vector3.left, 180, radius);
-        Handles.DrawLine(lower + _offsetX, upper + _offsetX);
-        Handles.DrawLine(lower - _offsetX, upper - _offsetX);
+        Handles.DrawLine(lower + offsetX, upper + offsetX);
+        Handles.DrawLine(lower - offsetX, upper - offsetX);
         Handles.DrawWireArc(lower, Vector3.back, Vector3.left, -180, radius);
 
         //draw sideways
         Handles.DrawWireArc(upper, Vector3.left, Vector3.back, -180, radius);
-        Handles.DrawLine(lower + _offsetZ, upper + _offsetZ);
-        Handles.DrawLine(lower - _offsetZ, upper - _offsetZ);
+        Handles.DrawLine(lower + offsetZ, upper + offsetZ);
+        Handles.DrawLine(lower - offsetZ, upper - offsetZ);
         Handles.DrawWireArc(lower, Vector3.left, Vector3.back, 180, radius);
 
         //draw center
