@@ -7,30 +7,10 @@ public class GizmosMona : MonoBehaviour
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
     static void DrawSceneObjects(Transform transform, GizmoType gizmoType)
     {
-        Mona.MonaReactor _reactor = transform.GetComponent<Mona.MonaReactor>();
-        Mona.PlayerPropertiesVolume _ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
+        if (transform == null) return;
 
-        if (_reactor == null && _ppv == null) return;
-
-        if (_reactor != null)
-        {
-            Gizmos.color = Color.magenta * 0.6f;
-
-            DrawHooks(_reactor.OnEnterTrigger, transform);
-            DrawHooks(_reactor.OnExitTrigger, transform);
-
-            // Draw icon from Resources folder
-            Gizmos.DrawIcon(transform.position, "Reactor", true);
-        }
-
-        Gizmos.color = Color.yellow * 0.6f;
-        Gizmos.DrawIcon(transform.position, "PPV", true);
-
-        // Draw the outline of the box collider
-        BoxCollider _collider = transform.GetComponent<BoxCollider>();
-        if (_collider != null) return;
-        Gizmos.DrawWireCube(_collider.center + transform.position, _collider.size);
-
+        DrawReactor(transform, gizmoType);
+        DrawPlayerPropertiesVolume(transform, gizmoType);
     }
 
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
@@ -102,6 +82,55 @@ public class GizmosMona : MonoBehaviour
         DrawWireCapsule(pos + new Vector3(0, _height, 0), pos - new Vector3(0, _height, 0), 0.28f);
     }
 
+    // Draws the reactor
+    static void DrawReactor(Transform transform, GizmoType gizmoType)
+    {
+        Mona.MonaReactor _reactor = transform.GetComponent<Mona.MonaReactor>();
+        if (_reactor == null) return;
+
+        Gizmos.color = Color.magenta * 0.6f;
+
+        DrawHooks(_reactor.OnEnterTrigger, transform);
+        DrawHooks(_reactor.OnExitTrigger, transform);
+
+        Gizmos.DrawIcon(transform.position, "Reactor", true);
+        DrawWireBox(transform);
+    }
+
+    // Draws the properties volumes
+    static void DrawPlayerPropertiesVolume(Transform transform, GizmoType gizmoType)
+    {
+        Mona.PlayerPropertiesVolume _ppv = transform.GetComponent<Mona.PlayerPropertiesVolume>();
+        if (_ppv == null) return;
+
+        Gizmos.color = Color.yellow * 0.6f;
+        Gizmos.DrawIcon(transform.position, "PPV", true);
+
+        DrawWireBox(transform);
+    }
+
+    // Draws all connections between MonaReactors
+    static void DrawHooks(Mona.MonaEvent[] events, Transform transform)
+    {
+        foreach (Mona.MonaEvent _monaEvent in events)
+        {
+            if (_monaEvent.Object == null) continue;
+
+            Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
+            Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
+        }
+    }
+
+    // Draw the outline of the box collider
+    static void DrawWireBox(Transform transform)
+    {
+        BoxCollider _collider = transform.GetComponent<BoxCollider>();
+
+        if (_collider == null) return;
+        Gizmos.DrawWireCube(_collider.center + transform.position, _collider.size);
+    }
+
+    // Draw capsule collider
     static void DrawWireCapsule(Vector3 upper, Vector3 lower, float radius)
     {
         Vector3 _offsetX = new Vector3(radius, 0f, 0f);
@@ -122,20 +151,6 @@ public class GizmosMona : MonoBehaviour
         //draw center
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);
-    }
-    
-    // Draws all connections between MonaReactors
-    static void DrawHooks(Mona.MonaEvent[] events, Transform transform)
-    {
-        foreach (Mona.MonaEvent _monaEvent in events)
-        {
-            if (_monaEvent.Object != null)
-            {
-                // Draw a line to the object and the reactor
-                Gizmos.DrawLine(transform.position, _monaEvent.Object.transform.position);
-                Gizmos.DrawIcon(_monaEvent.Object.transform.position, "hooked", true);
-            }
-        }
     }
 }
 #endif
