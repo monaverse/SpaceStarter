@@ -41,9 +41,6 @@ namespace Mona
             }
             else
             {
-                Texture _errIcon = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa_err.png", typeof(Texture));
-                GUI.DrawTexture(new Rect(10, 10, 48, 48), _errIcon, ScaleMode.ScaleAndCrop, false);
-
                 foreach (string _error in QualityAssurance.SpaceErrors)
                 {
                     GUILayout.Space(1);
