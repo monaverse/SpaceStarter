@@ -4,6 +4,7 @@ using UnityEditor;
 
 public class GizmosMona : MonoBehaviour
 {
+    // Draws all the connections between the reactors & volumes of the player properties.
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
     static void DrawSceneObjects(Transform transform, GizmoType gizmoType)
     {
@@ -13,67 +14,54 @@ public class GizmosMona : MonoBehaviour
         DrawPlayerPropertiesVolume(transform, gizmoType);
     }
 
+    // Draws all spawn points of the space
     [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
-    static void DrawGizmo(Transform transform, GizmoType gizmoType)
+    static void DrawPlayerSpawn(Transform transform, GizmoType gizmoType)
     {
         if (transform.tag != "SpawnPoint" || transform.gameObject.scene.name.Equals("Artifacts")) return;
 
-        // Raycast check if ground is valid
-        bool spawnNotOK = false;
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1000f))
+        bool spawnObstructed = true;
+
+        // Check capsule collision so we don't spawn inside a wall
+        if (!Physics.CheckCapsule(transform.position + Vector3.up * 0.28f, transform.position + Vector3.up * 1.58f, 0.28f))
         {
-            if (hit.collider.gameObject.layer != 0)
+            spawnObstructed = false;
+        }
+
+        RaycastHit hit;
+        if (!Physics.Raycast(transform.position, Vector3.down, out hit, 1000f))
+        {
+            spawnObstructed = true;
+            hit.point = Vector3.down * 1000;
+        }
+
+        if (spawnObstructed)
+        {
+            SetDrawingColor(Color.red);
+        }
+        else
+        {
+            if (transform.gameObject.scene.name.Equals("Space"))
             {
-                spawnNotOK = true;
+                SetDrawingColor(Color.blue * 0.7f);
             }
             else
             {
-                Handles.color = Color.green;
-                Gizmos.color = Color.green;
-                Handles.DrawWireDisc(hit.point, Vector3.up, 0.5f);
-                Gizmos.DrawLine(transform.position, hit.point);
+                SetDrawingColor(Color.green * 0.7f);
             }
         }
-        else
-        {
-            spawnNotOK = true;
-            Handles.color = Color.red;
-        }
 
-        // Check capsule collision so we don't spawn inside a wall
-        if (Physics.CheckCapsule(transform.position + Vector3.up * 0.28f, transform.position + Vector3.up * 1.58f, 0.28f))
-        {
-            spawnNotOK = true;
-        }
+        // Draw ground distance
+        Handles.DrawWireDisc(hit.point, Vector3.up, 0.5f);
+        Gizmos.DrawLine(transform.position, hit.point);
 
-        if (transform.gameObject.scene.name.Equals("Space"))
-        {
-            Gizmos.color = Color.blue * 0.7f;
-        }
-        else
-        {
-            Gizmos.color = Color.green * 0.7f;
-        }
-
-        if (spawnNotOK)
-        {
-            Handles.color = Color.red;
-            Gizmos.color = Color.red;
-        }
-
+        // Draw player mesh, for point of scale reference
         Gizmos.DrawMesh(
             Resources.Load<Mesh>("Editor/Avatar"),
             transform.position,
             transform.rotation,
             new Vector3(1, 1, 1)
         );
-
-        // Draw capsule
-        if (!spawnNotOK)
-        {
-            Handles.color = Color.blue;
-        }
 
         float offset = 0.93f;
         float height = 0.65f;
@@ -151,6 +139,13 @@ public class GizmosMona : MonoBehaviour
         //draw center
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);
+    }
+
+    // Sets drawing color for in-editor gizmos
+    static void SetDrawingColor(Color color)
+    {
+        Handles.color = color;
+        Gizmos.color = color;
     }
 }
 #endif
