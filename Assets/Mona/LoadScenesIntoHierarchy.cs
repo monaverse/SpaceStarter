@@ -20,7 +20,7 @@ namespace Mona
                 Constants.PortalsPath,
                 Constants.ArtifactsPath
             };
-            
+
             foreach (string scene in sceneList)
             {
                 EditorSceneManager.OpenScene(scene, OpenSceneMode.Additive);

@@ -20,13 +20,14 @@ namespace Mona
             EditorApplication.hierarchyWindowItemOnGUI += HierarchyItemCB;
         }
 
-        public void Register(Dictionary<string, List<int>> SpaceErrors){
-            if(SpaceErrors == null) return;
+        public void Register(Dictionary<string, List<int>> SpaceErrors)
+        {
+            if (SpaceErrors == null) return;
             foreach (List<int> error in SpaceErrors.Values)
             {
                 foreach (int objectID in error)
                 {
-                    if(objectID == -1) continue;
+                    if (objectID == -1) continue;
                     RegisterHierarchyItem(objectID, 1, 0);
                 }
             }
@@ -43,7 +44,7 @@ namespace Mona
 
         public void Unregister()
         {
-            if(IconMap.Count == 0) return;
+            if (IconMap.Count == 0) return;
 
             foreach (int key in IconMap.Keys)
             {

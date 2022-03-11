@@ -39,12 +39,15 @@ namespace Mona
             TestObjectColliders<Collider>("Artifact", MonaErrorCodes.BAD_ARTIFACT_COLLIDER);
             TestObjectColliders<BoxCollider>("Portal", MonaErrorCodes.BAD_PORTAL_COLLIDER);
 
-            if(HierarchyDrawer != null){
+            if (HierarchyDrawer != null)
+            {
                 HierarchyDrawer.Unregister();
-            }else{
+            }
+            else
+            {
                 HierarchyDrawer = new EditorHierarchyDrawer();
             }
-            
+
             HierarchyDrawer.Register(SpaceErrors);
 
             return SpaceErrors;

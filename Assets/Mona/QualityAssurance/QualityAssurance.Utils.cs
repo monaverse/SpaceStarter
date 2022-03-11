@@ -53,11 +53,12 @@ namespace Mona
 
         public static void AddError(string error, int objectID)
         {
-            if (SpaceErrors.ContainsKey(error)){
+            if (SpaceErrors.ContainsKey(error))
+            {
                 SpaceErrors[error].Add(objectID);
                 return;
             }
-            
+
             List<int> objectIDs = new List<int>();
             objectIDs.Add(objectID);
             SpaceErrors.Add(error, objectIDs);

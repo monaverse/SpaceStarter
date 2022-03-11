@@ -4,7 +4,7 @@ namespace Mona
 {
     [System.Serializable]
     public class PlayerProperties
-    {   
+    {
         [HideInInspector]
         public int PropertiesVersion = 1;
 
