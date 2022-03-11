@@ -12,10 +12,8 @@ namespace Mona
         private static void TestSceneExistence(string sceneName, string error)
         {
             Scene scene = SceneManager.GetSceneByName(sceneName);
-            if (scene.IsValid() == false)
-            {
-                SpaceErrors.Add(error);
-            }
+            if (scene.IsValid() != false) return;
+            SpaceErrors.Add(error);
         }
 
         // 1. Check to make sure scene has a valid root level object tagged with the layer name
@@ -31,28 +29,26 @@ namespace Mona
             bool found = false;
             foreach (var rootObject in rootObjects)
             {
-                if (rootObject.tag == layerTag)
-                {
-                    found = true;
-                    break;
-                }
+                if (rootObject.tag != layerTag) continue;
+
+                found = true;
+                break;
             }
+
             if (!found) SpaceErrors.Add(missingLayerError);
 
-            if (rootObjects.Length > 1)
+            if (rootObjects.Length < 1) return;
+
+            foreach (var rootObject in rootObjects)
             {
-                foreach (var rootObject in rootObjects)
-                {
-                    if (
-                        !rootObject.tag.Equals(layerTag)
-                        && !rootObject.name.StartsWith("!ftraceLightmaps")
-                        && !rootObject.name.Equals("PDC")
-                        && rootObject.activeSelf
-                    )
-                    {
-                        SpaceErrors.Add(multipleRootError);
-                    }
-                }
+                if (
+                    rootObject.tag.Equals(layerTag)
+                    && rootObject.name.StartsWith("!ftraceLightmaps")
+                    && rootObject.name.Equals("PDC")
+                    && !rootObject.activeSelf
+                ) continue;
+
+                SpaceErrors.Add(multipleRootError);
             }
         }
 
@@ -62,10 +58,8 @@ namespace Mona
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(objectTag);
             foreach (GameObject sceneObject in gameObjects)
             {
-                if (FindParentWithTag(layerTag, sceneObject) == null)
-                {
-                    SpaceErrors.Add(error);
-                }
+                if (FindParentWithTag(layerTag, sceneObject) != null) continue;
+                SpaceErrors.Add(error);
             }
         }
 
@@ -106,7 +100,9 @@ namespace Mona
                 {
                     foreach (string tag in validTags)
                     {
-                        if (child.tag == tag) isValid = true;
+                        if (child.tag != tag) continue; 
+                        isValid = true;
+                        break;
                     }
                 }
 
@@ -127,10 +123,8 @@ namespace Mona
             foreach (GameObject sceneObject in gameObjects)
             {
                 Collider collider = sceneObject.GetComponent<T>() as Collider;
-                if (collider == null || !collider.enabled || collider.isTrigger)
-                {
-                    SpaceErrors.Add(error);
-                }
+                if (collider != null || collider.enabled || !collider.isTrigger) continue;
+                SpaceErrors.Add(error);
             }
         }
     }

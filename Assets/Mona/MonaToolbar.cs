@@ -26,14 +26,7 @@ namespace Mona
             GUI.color = Color.white * 0.75f;
             GUI.contentColor = Color.white * 1.19f;
 
-            if (QualityAssurance.SpaceErrors != null && QualityAssurance.SpaceErrors.Count != 0)
-            {
-                GUI.contentColor = Color.red * 20.19f;
-            }
-            else
-            {
-                GUI.contentColor = Color.white * 1.2f;
-            }
+            GUI.contentColor = QualityAssurance.SpaceErrors != null && QualityAssurance.SpaceErrors.Count != 0 ? Color.red * 20.19f : Color.white * 1.2f;
 
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
             {

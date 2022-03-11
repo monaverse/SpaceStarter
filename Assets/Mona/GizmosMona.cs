@@ -35,21 +35,13 @@ public class GizmosMona : MonoBehaviour
             hit.point = Vector3.down * 1000;
         }
 
-        if (spawnObstructed)
-        {
-            SetDrawingColor(Color.red);
-        }
-        else
-        {
-            if (transform.gameObject.scene.name.Equals("Space"))
-            {
-                SetDrawingColor(Color.blue * 0.7f);
-            }
-            else
-            {
-                SetDrawingColor(Color.green * 0.7f);
-            }
-        }
+        SetDrawingColor(
+            spawnObstructed
+            ? Color.red
+            : transform.gameObject.scene.name.Equals("Space")
+                ? Color.blue * 0.7f
+                : Color.green * 0.7f
+        );
 
         // Draw ground distance
         Handles.DrawWireDisc(hit.point, Vector3.up, 0.5f);
