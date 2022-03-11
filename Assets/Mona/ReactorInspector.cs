@@ -10,7 +10,8 @@ namespace Mona
         public override void OnInspectorGUI()
         {
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/reactor.png", typeof(Texture));
-            if(banner){
+            if (banner)
+            {
                 GUI.DrawTexture(new Rect(0, 0, 498, 66), banner, ScaleMode.ScaleToFit, false);
             }
             GUILayout.Space(60);

@@ -28,7 +28,8 @@ namespace Mona
             buttonStyle.margin = new RectOffset(30, 30, 10, 10);
 
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa.png", typeof(Texture));
-            if(banner){
+            if (banner)
+            {
                 GUILayout.BeginHorizontal();
                 GUI.DrawTexture(new Rect(0, 0, 498, 66), banner, ScaleMode.ScaleToFit, false);
                 GUILayout.EndHorizontal();

@@ -76,7 +76,6 @@ namespace Mona
             // Get the icons
             int[] icon = DrawingList[instanceID];
 
-
             // Draw a highlight
             if (icon[1] != -1)
             {
