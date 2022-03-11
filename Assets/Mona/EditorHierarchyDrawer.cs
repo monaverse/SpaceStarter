@@ -6,12 +6,12 @@ using System.Collections.Generic;
 namespace Mona
 {
     [InitializeOnLoad]
-    class TreeIcon
+    public class EditorHierarchyDrawer
     {
-        static Dictionary<int, int[]> IconMap;
-        static List<Texture2D> Icons;
+        public Dictionary<int, int[]> IconMap;
+        public List<Texture2D> Icons;
 
-        static TreeIcon()
+        public EditorHierarchyDrawer()
         {
             Icons = new List<Texture2D>();
             IconMap = new Dictionary<int, int[]>();
@@ -20,7 +20,19 @@ namespace Mona
             EditorApplication.hierarchyWindowItemOnGUI += HierarchyItemCB;
         }
 
-        public static int RegisterHierarchyItem(int instanceID, int icon, int highlight = -1)
+        public void Register(Dictionary<string, List<int>> SpaceErrors){
+            if(SpaceErrors == null) return;
+            foreach (List<int> error in SpaceErrors.Values)
+            {
+                foreach (int objectID in error)
+                {
+                    if(objectID == -1) continue;
+                    RegisterHierarchyItem(objectID, 1, 0);
+                }
+            }
+        }
+
+        public int RegisterHierarchyItem(int instanceID, int icon, int highlight = -1)
         {
             if (IconMap.ContainsKey(instanceID)) return instanceID;
             IconMap.Add(instanceID, new int[] { icon, highlight });
@@ -29,14 +41,24 @@ namespace Mona
             return instanceID;
         }
 
-        public static void UnregisterHierarchyItem(int instanceID)
+        public void Unregister()
+        {
+            if(IconMap.Count == 0) return;
+
+            foreach (int key in IconMap.Keys)
+            {
+                UnregisterHierarchyItem(key);
+            }
+        }
+
+        public void UnregisterHierarchyItem(int instanceID)
         {
             IconMap.Remove(instanceID);
 
             EditorApplication.RepaintHierarchyWindow();
         }
 
-        static void HierarchyItemCB(int instanceID, Rect selectionRect)
+        void HierarchyItemCB(int instanceID, Rect selectionRect)
         {
             if (!IconMap.ContainsKey(instanceID)) return;
 

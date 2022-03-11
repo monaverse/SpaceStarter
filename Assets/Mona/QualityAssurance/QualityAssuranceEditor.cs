@@ -41,7 +41,7 @@ namespace Mona
             }
             else
             {
-                foreach (string error in QualityAssurance.SpaceErrors)
+                foreach (string error in QualityAssurance.SpaceErrors.Keys)
                 {
                     GUILayout.Space(1);
 
@@ -50,8 +50,21 @@ namespace Mona
                     title = title.Substring(0, 1).ToUpper() + title.Substring(1);
 
                     GUILayout.BeginHorizontal("box");
-                    GUILayout.Box(title, GUILayout.MinWidth(100));
+                    GUILayout.Box(title + " ( " + QualityAssurance.SpaceErrors[error].Count + " )", GUILayout.MinWidth(100));
+                    GUILayout.BeginVertical();
+                    
                     GUILayout.Label(QualityAssurance.GetErrorDescription(error));
+                    if (GUILayout.Button("Show", buttonStyle))
+                    {
+                        EditorGUIUtility.PingObject(QualityAssurance.SpaceErrors[error][0]);
+
+                        // Get game object
+                        GameObject selectTarget = EditorUtility.InstanceIDToObject(QualityAssurance.SpaceErrors[error][0]) as GameObject;
+
+                        Selection.activeObject = selectTarget;
+                        SceneView.FrameLastActiveSceneView();
+                    }
+                    GUILayout.EndVertical();
                     GUILayout.EndHorizontal();
                 }
             }

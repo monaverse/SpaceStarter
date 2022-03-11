@@ -13,7 +13,8 @@ namespace Mona
         {
             Scene scene = SceneManager.GetSceneByName(sceneName);
             if (scene.IsValid() != false) return;
-            SpaceErrors.Add(error);
+
+            AddError(error, -1);
         }
 
         // 1. Check to make sure scene has a valid root level object tagged with the layer name
@@ -35,20 +36,21 @@ namespace Mona
                 break;
             }
 
-            if (!found) SpaceErrors.Add(missingLayerError);
+            if (!found) AddError(missingLayerError, -1);
 
             if (rootObjects.Length < 1) return;
 
             foreach (var rootObject in rootObjects)
             {
                 if (
-                    rootObject.tag.Equals(layerTag)
-                    && rootObject.name.StartsWith("!ftraceLightmaps")
-                    && rootObject.name.Equals("PDC")
-                    && !rootObject.activeSelf
-                ) continue;
-
-                SpaceErrors.Add(multipleRootError);
+                    !rootObject.tag.Equals(layerTag)
+                    && !rootObject.name.StartsWith("!ftraceLightmaps")
+                    && !rootObject.name.Equals("PDC")
+                    && rootObject.activeSelf
+                )
+                {
+                    AddError(multipleRootError, rootObject.GetInstanceID());
+                }
             }
         }
 
@@ -59,7 +61,7 @@ namespace Mona
             foreach (GameObject sceneObject in gameObjects)
             {
                 if (FindParentWithTag(layerTag, sceneObject) != null) continue;
-                SpaceErrors.Add(error);
+                AddError(error, sceneObject.GetInstanceID());
             }
         }
 
@@ -72,7 +74,7 @@ namespace Mona
             {
                 if (names.ContainsKey(sceneObject.name))
                 {
-                    SpaceErrors.Add(error);
+                    AddError(error, sceneObject.GetInstanceID());
                     return;
                 }
                 names.Add(sceneObject.name, true);
@@ -100,13 +102,13 @@ namespace Mona
                 {
                     foreach (string tag in validTags)
                     {
-                        if (child.tag != tag) continue; 
+                        if (child.tag != tag) continue;
                         isValid = true;
                         break;
                     }
                 }
 
-                if (!isValid) SpaceErrors.Add(error);
+                if (!isValid) AddError(error, rootObject.GetInstanceID());
             }
         }
 
@@ -124,7 +126,7 @@ namespace Mona
             {
                 Collider collider = sceneObject.GetComponent<T>() as Collider;
                 if (collider != null || collider.enabled || !collider.isTrigger) continue;
-                SpaceErrors.Add(error);
+                AddError(error, sceneObject.GetInstanceID());
             }
         }
     }
