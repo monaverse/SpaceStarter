@@ -23,7 +23,7 @@ public class GizmosMona : MonoBehaviour
         bool spawnObstructed = true;
 
         // Check capsule collision so we don't spawn inside a wall
-        if (!Physics.CheckCapsule(transform.position + Vector3.up * 0.28f, transform.position + Vector3.up * 1.58f, 0.28f))
+        if (!Physics.CheckCapsule(transform.position + Vector3.up * MonaConstants.PlayerWidth, transform.position + Vector3.up * MonaConstants.PlayerColliderYOffset, MonaConstants.PlayerWidth))
         {
             spawnObstructed = false;
         }
@@ -63,11 +63,10 @@ public class GizmosMona : MonoBehaviour
             new Vector3(1, 1, 1)
         );
 
-        float offset = 0.93f;
         float height = 0.65f;
         Vector3 pos = transform.position;
-        pos.y += offset;
-        DrawWireCapsule(pos + new Vector3(0, height, 0), pos - new Vector3(0, height, 0), 0.28f);
+        pos.y += MonaConstants.PlayerColliderYOffset;
+        DrawWireCapsule(pos + new Vector3(0, height, 0), pos - new Vector3(0, height, 0), MonaConstants.PlayerWidth);
     }
 
     // Draws the reactor
