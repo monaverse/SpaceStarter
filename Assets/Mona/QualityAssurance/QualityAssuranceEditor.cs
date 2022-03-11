@@ -52,17 +52,19 @@ namespace Mona
                     GUILayout.BeginHorizontal("box");
                     GUILayout.Box(title + " ( " + QualityAssurance.SpaceErrors[error].Count + " )", GUILayout.MinWidth(100));
                     GUILayout.BeginVertical();
-                    
+
                     GUILayout.Label(QualityAssurance.GetErrorDescription(error));
-                    if (GUILayout.Button("Show", buttonStyle))
-                    {
-                        EditorGUIUtility.PingObject(QualityAssurance.SpaceErrors[error][0]);
+                    if(QualityAssurance.SpaceErrors[error][0] != -1){
+                        if (GUILayout.Button("Show", buttonStyle))
+                        {
+                            EditorGUIUtility.PingObject(QualityAssurance.SpaceErrors[error][0]);
 
-                        // Get game object
-                        GameObject selectTarget = EditorUtility.InstanceIDToObject(QualityAssurance.SpaceErrors[error][0]) as GameObject;
+                            // Get game object
+                            GameObject selectTarget = EditorUtility.InstanceIDToObject(QualityAssurance.SpaceErrors[error][0]) as GameObject;
 
-                        Selection.activeObject = selectTarget;
-                        SceneView.FrameLastActiveSceneView();
+                            Selection.activeObject = selectTarget;
+                            SceneView.FrameLastActiveSceneView();
+                        }
                     }
                     GUILayout.EndVertical();
                     GUILayout.EndHorizontal();
