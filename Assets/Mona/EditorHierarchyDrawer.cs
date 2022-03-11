@@ -44,18 +44,13 @@ namespace Mona
 
         public void Unregister()
         {
-            if (IconMap.Count == 0) return;
-
-            foreach (int key in IconMap.Keys)
-            {
-                UnregisterHierarchyItem(key);
-            }
+            if (IconMap == null) return;
+            IconMap = new Dictionary<int, int[]>();
         }
 
         public void UnregisterHierarchyItem(int instanceID)
         {
             IconMap.Remove(instanceID);
-
             EditorApplication.RepaintHierarchyWindow();
         }
 
