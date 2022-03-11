@@ -83,24 +83,5 @@ namespace Mona
         [Tooltip("List of events to be executed when a player looks at this trigger")]
         private MonaEvent[] OnPlayerLookAt; // (Not implemented yet)
 
-        public void Awake()
-        {
-            ReactorAwake();
-        }
-
-        // On enter event
-        public void OnTriggerEnter(Collider eventObject)
-        {
-            if (OnEnterTrigger.Length == 0) { return; }
-            ReactorOnTriggerEnter(eventObject);
-        }
-
-        // On exit event
-        public void OnTriggerExit(Collider eventObject)
-        {
-            if (OnExitTrigger.Length == 0) { return; }
-            ReactorOnTriggerExit(eventObject);
-        }
-
     }
 }
