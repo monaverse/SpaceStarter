@@ -27,10 +27,12 @@ namespace Mona
             GUIStyle buttonStyle = GUI.skin.button;
             buttonStyle.margin = new RectOffset(30, 30, 10, 10);
 
-            GUILayout.BeginHorizontal();
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa.png", typeof(Texture));
-            GUI.DrawTexture(new Rect(0, 0, 498, 66), banner, ScaleMode.ScaleToFit, false);
-            GUILayout.EndHorizontal();
+            if(banner){
+                GUILayout.BeginHorizontal();
+                GUI.DrawTexture(new Rect(0, 0, 498, 66), banner, ScaleMode.ScaleToFit, false);
+                GUILayout.EndHorizontal();
+            }
             GUILayout.Space(64);
 
             if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
