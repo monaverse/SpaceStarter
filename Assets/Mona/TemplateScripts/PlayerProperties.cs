@@ -14,15 +14,15 @@ namespace Mona
 
         // The upward force applied to the player when jumping
         [Tooltip("The upward force applied to the player when jumping")]
-        public float JumpHeight = 6.5f;
+        public float JumpHeight = -1;
 
         // The speed at which the player moves
         [Tooltip("The speed at which the player moves")]
-        public float WalkSpeed = 2.7f;
+        public float WalkSpeed = -1;
 
         // The speed at which the player moves when sprinting
         [Tooltip("The speed at which the player moves when sprinting")]
-        public float SprintSpeed = 10f;
+        public float SprintSpeed = -1;
 
         // The post processing strength of the Bloom effect
         public bool OverrideBloom = false;
