@@ -95,7 +95,7 @@ public class GizmosMona : MonoBehaviour
         if (transform.tag != "SpawnPoint" || !transform.gameObject.scene.name.Equals("Artifacts")) return;
 
         Gizmos.color = Color.red * 0.6f;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 1);
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
         Gizmos.DrawWireCube(transform.position, new Vector3(0.3f, 0.3f, 0.3f));
     }
 
