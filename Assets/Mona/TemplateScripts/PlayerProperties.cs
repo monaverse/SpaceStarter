@@ -7,36 +7,34 @@ namespace Mona
     {
         [HideInInspector]
         public int PropertiesVersion = 1;
+        public bool OverrideGravity = false;
 
         // Fall speed of players in this volume
-        [Tooltip("Fall speed of players in this volume")]
-        public float Gravity = -15f;
+        [Tooltip("(Default -15f) - Fall speed of players in this volume")]
+        public float Gravity = -1;
 
         // The upward force applied to the player when jumping
-        [Tooltip("The upward force applied to the player when jumping")]
+        [Tooltip("(Default 6.5f) - The upward force applied to the player when jumping")]
         public float JumpHeight = -1;
 
         // The speed at which the player moves
-        [Tooltip("The speed at which the player moves")]
+        [Tooltip("(Default 2.7f) - The speed at which the player moves")]
         public float WalkSpeed = -1;
 
         // The speed at which the player moves when sprinting
-        [Tooltip("The speed at which the player moves when sprinting")]
-        public float SprintSpeed = -1;
+        [Tooltip("(Default 10f) - The speed at which the player moves when sprinting")]
+        public float SprintSpeed = -1f;
 
         // The post processing strength of the Bloom effect
-        public bool OverrideBloom = false;
         [Tooltip("The post processing strength of the bloom effect")]
-        public float Bloom = 0f;
+        public float Bloom = -1f;
 
         // The post processing strength of the Chromatic Aberration effect
-        public bool OverrideChromaticAberration = false;
         [Tooltip("The post processing strength of the Chromatic Aberration effect")]
-        public float ChromaticAberration = 0f;
+        public float ChromaticAberration = -1f;
 
         // The post processing strength of the MotionBlur
-        public bool OverrideMotionBlur = false;
         [Tooltip("The post processing strength of the MotionBlur")]
-        public float MotionBlur = 0f;
+        public float MotionBlur = -1f;
     }
 }
