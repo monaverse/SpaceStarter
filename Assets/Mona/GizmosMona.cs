@@ -12,6 +12,7 @@ public class GizmosMona : MonoBehaviour
 
         DrawReactor(transform, gizmoType);
         DrawPlayerPropertiesVolume(transform, gizmoType);
+        DrawArtifactSpawnPoint(transform, gizmoType);
     }
 
     // Draws all spawn points of the space
@@ -86,6 +87,16 @@ public class GizmosMona : MonoBehaviour
         Gizmos.DrawIcon(transform.position, "PPV", true);
 
         DrawWireBox(transform);
+    }
+
+    // Draws the rotation of the artifact spawn point
+    static void DrawArtifactSpawnPoint(Transform transform, GizmoType gizmoType)
+    {
+        if (transform.tag != "SpawnPoint" || !transform.gameObject.scene.name.Equals("Artifacts")) return;
+
+        Gizmos.color = Color.red * 0.6f;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 1);
+        Gizmos.DrawWireCube(transform.position, new Vector3(0.3f, 0.3f, 0.3f));
     }
 
     // Draws all connections between MonaReactors
