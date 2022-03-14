@@ -6,9 +6,9 @@ namespace Mona
     public class PlayerProperties
     {
         [HideInInspector]
-        public int PropertiesVersion = 1;
-        public bool OverrideGravity = false;
+        public string Version = "0.0.1";
 
+        public bool OverrideGravity = false;
         // Fall speed of players in this volume
         [Tooltip("(Default -15f) - Fall speed of players in this volume")]
         public float Gravity = -1;
