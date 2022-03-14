@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 
 public static class ErrorDescriptions
@@ -96,3 +97,4 @@ public static class MonaErrorCodes
         };
     }
 }
+#endif

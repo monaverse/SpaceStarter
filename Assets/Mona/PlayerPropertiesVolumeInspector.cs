@@ -4,12 +4,12 @@ using UnityEditor;
 
 namespace Mona
 {
-    [CustomEditor(typeof(MonaReactor))]
-    public class ReactorInspector : Editor
+    [CustomEditor(typeof(PlayerPropertiesVolume))]
+    public class PlayerPropertiesVolumeInspector : Editor
     {
         public override void OnInspectorGUI()
         {
-            Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/reactor.png", typeof(Texture));
+            Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/ppv.png", typeof(Texture));
             if (banner)
             {
                 GUI.DrawTexture(new Rect(0, 0, 498, 66), banner, ScaleMode.ScaleToFit, false);

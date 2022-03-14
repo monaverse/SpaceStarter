@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -11,11 +12,10 @@ namespace Mona
         // Tests to make sure a specific scene exists
         private static void TestSceneExistence(string sceneName, string error)
         {
-            Scene _scene = SceneManager.GetSceneByName(sceneName);
-            if (_scene.IsValid() == false)
-            {
-                SpaceErrors.Add(error);
-            }
+            Scene scene = SceneManager.GetSceneByName(sceneName);
+            if (scene.IsValid() != false) return;
+
+            AddError(error, -1);
         }
 
         // 1. Check to make sure scene has a valid root level object tagged with the layer name
@@ -24,34 +24,33 @@ namespace Mona
         //      Code: MULTIPLE_X_ROOTS
         private static void TestSceneLayer(string sceneName, string layerTag, string missingLayerError, string multipleRootError)
         {
-            Scene _scene = SceneManager.GetSceneByName(sceneName);
-            if (!_scene.IsValid()) return;
-            var _rootObjects = _scene.GetRootGameObjects();
+            Scene scene = SceneManager.GetSceneByName(sceneName);
+            if (!scene.IsValid()) return;
+            var rootObjects = scene.GetRootGameObjects();
 
-            bool _found = false;
-            foreach (var _rootObject in _rootObjects)
+            bool found = false;
+            foreach (var rootObject in rootObjects)
             {
-                if (_rootObject.tag == layerTag)
-                {
-                    _found = true;
-                    break;
-                }
+                if (rootObject.tag != layerTag) continue;
+
+                found = true;
+                break;
             }
-            if (!_found) SpaceErrors.Add(missingLayerError);
 
-            if (_rootObjects.Length > 1)
+            if (!found) AddError(missingLayerError, -1);
+
+            if (rootObjects.Length < 1) return;
+
+            foreach (var rootObject in rootObjects)
             {
-                foreach (var _object in _rootObjects)
+                if (
+                    !rootObject.tag.Equals(layerTag)
+                    && !rootObject.name.StartsWith("!ftraceLightmaps")
+                    && !rootObject.name.Equals("PDC")
+                    && rootObject.activeSelf
+                )
                 {
-                    if (
-                        !_object.tag.Equals(layerTag)
-                        && !_object.name.StartsWith("!ftraceLightmaps")
-                        && !_object.name.Equals("PDC")
-                        && _object.activeSelf
-                    )
-                    {
-                        SpaceErrors.Add(multipleRootError);
-                    }
+                    AddError(multipleRootError, rootObject.GetInstanceID());
                 }
             }
         }
@@ -59,58 +58,58 @@ namespace Mona
         // Checks if an object tag is properly contained within its parent layer
         private static void TestObjectPlacements(string objectTag, string layerTag, string error)
         {
-            GameObject[] _gameObjects = GameObject.FindGameObjectsWithTag(objectTag);
-            foreach (GameObject _object in _gameObjects)
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(objectTag);
+            foreach (GameObject sceneObject in gameObjects)
             {
-                if (FindParentWithTag(layerTag, _object) == null)
-                {
-                    SpaceErrors.Add(error);
-                }
+                if (FindParentWithTag(layerTag, sceneObject) != null) continue;
+                AddError(error, sceneObject.GetInstanceID());
             }
         }
 
         // Tests the uniqueness of a set of game objects
         public static void TestNameUniqueness(string tag, string error)
         {
-            GameObject[] _allObjects = GameObject.FindGameObjectsWithTag(tag);
-            Dictionary<string, bool> _names = new Dictionary<string, bool>();
-            foreach (GameObject _object in _allObjects)
+            GameObject[] allObjects = GameObject.FindGameObjectsWithTag(tag);
+            Dictionary<string, bool> names = new Dictionary<string, bool>();
+            foreach (GameObject sceneObject in allObjects)
             {
-                if (_names.ContainsKey(_object.name))
+                if (names.ContainsKey(sceneObject.name))
                 {
-                    SpaceErrors.Add(error);
+                    AddError(error, sceneObject.GetInstanceID());
                     return;
                 }
-                _names.Add(_object.name, true);
+                names.Add(sceneObject.name, true);
             }
         }
 
         // Makes sure all of the game objects in a layer belong in that layer
         public static void TestLayerContents(string layerName, string[] validTags, string error)
         {
-            GameObject _layer = GameObject.FindGameObjectWithTag(layerName);
-            if (!_layer) return;
+            GameObject layer = GameObject.FindGameObjectWithTag(layerName);
+            if (!layer) return;
 
-            foreach (Transform _rootObject in _layer.transform)
+            foreach (Transform rootObject in layer.transform)
             {
-                bool _isValid = false;
+                bool isValid = false;
 
                 foreach (string tag in validTags)
                 {
-                    if (_rootObject.tag == tag) _isValid = true;
+                    if (rootObject.tag == tag) isValid = true;
                 }
 
-                if (_isValid) continue;
+                if (isValid) continue;
 
-                foreach (Transform _child in _rootObject)
+                foreach (Transform child in rootObject)
                 {
                     foreach (string tag in validTags)
                     {
-                        if (_child.tag == tag) _isValid = true;
+                        if (child.tag != tag) continue;
+                        isValid = true;
+                        break;
                     }
                 }
 
-                if (!_isValid) SpaceErrors.Add(error);
+                if (!isValid) AddError(error, rootObject.GetInstanceID());
             }
         }
 
@@ -123,15 +122,14 @@ namespace Mona
         // Tests to make sure the collider on a game object is properly configured
         public static void TestObjectColliders<T>(string objectTag, string error)
         {
-            GameObject[] _gameObjects = GameObject.FindGameObjectsWithTag(objectTag);
-            foreach (GameObject _gameObject in _gameObjects)
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(objectTag);
+            foreach (GameObject sceneObject in gameObjects)
             {
-                Collider _collider = _gameObject.GetComponent<T>() as Collider;
-                if (_collider == null || !_collider.enabled || _collider.isTrigger)
-                {
-                    SpaceErrors.Add(error);
-                }
+                Collider collider = sceneObject.GetComponent<T>() as Collider;
+                if (collider != null || collider.enabled || !collider.isTrigger) continue;
+                AddError(error, sceneObject.GetInstanceID());
             }
         }
     }
 }
+#endif

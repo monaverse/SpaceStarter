@@ -12,13 +12,10 @@ namespace Mona
         [MenuItem("Mona/Quality Assurance")]
         public static void Init()
         {
+            QualityAssuranceEditor window = (QualityAssuranceEditor)EditorWindow.GetWindow(typeof(QualityAssuranceEditor));
 
-            QualityAssuranceEditor _window = (QualityAssuranceEditor)EditorWindow.GetWindow(typeof(QualityAssuranceEditor));
-
-            // Set Editor title
-            _window.titleContent = new GUIContent("Quality Assurance");
-
-            _window.Show();
+            window.titleContent = new GUIContent("Quality Assurance");
+            window.Show();
 
             QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
         }
@@ -27,70 +24,65 @@ namespace Mona
         {
             Scroll = GUILayout.BeginScrollView(Scroll, false, false);
 
-            GUIStyle _font = new GUIStyle();
-            _font.fontSize = 20;
-            _font.wordWrap = true;
+            GUIStyle buttonStyle = GUI.skin.button;
+            buttonStyle.margin = new RectOffset(30, 30, 10, 10);
 
-            GUIStyle _font2 = new GUIStyle();
-            _font.fontSize = 15;
-            _font.wordWrap = true;
-
-            GUIStyle _button1 = GUI.skin.button;
-            _button1.fontSize = 16;
-            _button1.margin = new RectOffset(30, 30, 10, 10);
-            //button1.fixedHeight = 30;
-
-            GUIStyle _style = new GUIStyle();
-            _style.fontSize = 15;
-            _font.wordWrap = true;
-
-            Texture2D _tex = new Texture2D(1, 1);
-            _tex.SetPixel(0, 0, new Color(1f, 0.0f, 0.0f, 1.0f));
-            _style.normal.background = _tex;
-
-            GUILayout.BeginHorizontal("", _style);
-            GUILayout.Space(10);
-            GUILayout.Label("Mona Quality Assurance", _font);
-            GUILayout.EndHorizontal();
-
-            // Enable wrapping text
-
+            Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa.png", typeof(Texture));
+            if (banner)
+            {
+                GUILayout.BeginHorizontal();
+                GUI.DrawTexture(new Rect(0, 0, 498, 66), banner, ScaleMode.ScaleToFit, false);
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.Space(64);
 
             if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
             {
-                GUILayout.Space(1);
-                GUILayout.Box("  √ No errors found.", _style, GUILayout.MinWidth(100));
+                GUILayout.BeginHorizontal("box");
+                GUILayout.Label("√ No errors found.");
+                GUILayout.EndHorizontal();
             }
             else
             {
-                GUILayout.BeginHorizontal("", _style, GUILayout.MinHeight(30));
-                GUILayout.Space(10);
-                GUILayout.TextArea("There are some issues in your space that needs to be fixed before minting can be approved.", _font2);
-                GUILayout.EndHorizontal();
-                GUILayout.Space(1);
-
-                foreach (string _error in QualityAssurance.SpaceErrors)
+                foreach (string error in QualityAssurance.SpaceErrors.Keys)
                 {
-                    GUILayout.Space(10);
+                    GUILayout.Space(1);
 
-                    string title = _error.Replace(".", " ");
+                    string title = error.Replace(".", " ");
                     title = title.Replace("-", " ");
                     title = title.Substring(0, 1).ToUpper() + title.Substring(1);
 
-                    GUILayout.Box("  ⚠️  " + title, _style, GUILayout.MinWidth(100));
                     GUILayout.BeginHorizontal("box");
-                    GUILayout.Label("└-- " + QualityAssurance.GetErrorDescription(_error));
+                    GUILayout.Box(title + " ( " + QualityAssurance.SpaceErrors[error].Count + " )", GUILayout.MinWidth(100));
+                    GUILayout.BeginVertical();
+
+                    GUILayout.Label(QualityAssurance.GetErrorDescription(error));
+
+                    if (QualityAssurance.SpaceErrors[error] != null && QualityAssurance.SpaceErrors[error][0] != -1)
+                    {
+                        if (GUILayout.Button("Show", buttonStyle))
+                        {
+                            EditorGUIUtility.PingObject(QualityAssurance.SpaceErrors[error][0]);
+
+                            // Get game object
+                            GameObject selectTarget = EditorUtility.InstanceIDToObject(QualityAssurance.SpaceErrors[error][0]) as GameObject;
+                            Selection.activeObject = selectTarget;
+                            SceneView.FrameLastActiveSceneView();
+                        }
+                    }
+
+                    GUILayout.EndVertical();
                     GUILayout.EndHorizontal();
                 }
             }
 
-            GUILayout.Space(10);
-
-            if (GUILayout.Button("Run Quality Test", _button1))
+            GUILayout.Space(1);
+            GUILayout.BeginHorizontal("box");
+            if (GUILayout.Button("Run Quality Test", buttonStyle))
             {
                 QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
             }
-
+            GUILayout.EndHorizontal();
             GUILayout.EndScrollView();
         }
     }
