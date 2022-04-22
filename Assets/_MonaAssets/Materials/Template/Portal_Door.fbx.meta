@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b4a5067e5159b3d47a0263b0e6a9308e
+guid: 69339d2c70bd99943a2b03ca6351aaf4
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Sign
-    second: {fileID: 2100000, guid: bfd8bba1012f74a468327b9862ad86bd, type: 2}
+    second: {fileID: 2100000, guid: 44f3bc934fc9c1c4c9f7974dcf7efff4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
