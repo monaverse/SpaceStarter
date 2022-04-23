@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 01a3b26713d88034eb7eedc3b3b74bfd
+guid: 7c8191a0aa00dc540a3d42c4c2e9ad00
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -8,12 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Sign
-    second: {fileID: 2100000, guid: 46feaa5d7f8aebb47af8b1966ecedf24, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Sticks
-    second: {fileID: 2100000, guid: 964346d3de9f7e048a0334a93ad38987, type: 2}
+    second: {fileID: 2100000, guid: 44f3bc934fc9c1c4c9f7974dcf7efff4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
