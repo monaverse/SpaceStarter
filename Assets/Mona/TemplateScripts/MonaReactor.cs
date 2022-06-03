@@ -74,7 +74,7 @@ namespace Mona
     [System.Serializable]
     public struct ColliderEvent
     {
-        [Tooltip("The lable name shown to the player")]
+        [Tooltip("The label name shown to the player")]
         public string Name;
 
         [Tooltip("List of events to be executed when a player looks at this trigger")]
