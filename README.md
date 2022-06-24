@@ -16,3 +16,6 @@ Mona [Video tutorials here](https://docs.mona.gallery/video-tutorials)
 ## 💬 Support
 
 For support, join our [Discord support channel](https://discord.gg/EbuzsyRh2Q)
+
+## ⚙️ Template version
+1.2.0
