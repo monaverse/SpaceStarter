@@ -2,8 +2,8 @@
 <p align="center">Start building your own custom Mona Space using our official template</p>
 
 ## ⬇️ Unity Version
-This template requires the ```Unity 2020.3.18``` version. You can download it here:
-https://unity3d.com/unity/whats-new/2020.3.18
+This template requires the ```Unity 2020.3.36``` version. You can download it here:
+https://unity3d.com/unity/whats-new/2020.3.36
 
 
 ## 📃 Documentation
@@ -18,4 +18,4 @@ Mona [Video tutorials here](https://docs.mona.gallery/video-tutorials)
 For support, join our [Discord support channel](https://discord.gg/EbuzsyRh2Q)
 
 ## ⚙️ Template version
-1.2.0
+1.3.0
