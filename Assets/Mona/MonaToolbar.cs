@@ -8,7 +8,6 @@ namespace Mona
     [InitializeOnLoad]
     public class MonaToolbar
     {
-        private static Vector2 scrollPos;
         static MonaToolbar()
         {
             ToolbarExtender.RightToolbarGUI.Add(OnToolbarGUI);
@@ -27,7 +26,7 @@ namespace Mona
             GUI.color = Color.white * 0.75f;
             GUI.contentColor = Color.white * 1.19f;
 
-            if (GUILayout.Button(new GUIContent("○ Update", "Check template configuration")))
+            if (GUILayout.Button(new GUIContent("○ Template", "Check template configuration")))
             {
                 TemplateHelper.ShowWindow();
             }
@@ -38,6 +37,8 @@ namespace Mona
             {
                 MonaLibraryWindow.ShowWindow();
             }
+
+            GUILayout.Space(25);
 
             
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
