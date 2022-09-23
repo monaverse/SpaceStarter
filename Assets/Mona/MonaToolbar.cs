@@ -8,6 +8,7 @@ namespace Mona
     [InitializeOnLoad]
     public class MonaToolbar
     {
+        private static Vector2 scrollPos;
         static MonaToolbar()
         {
             ToolbarExtender.RightToolbarGUI.Add(OnToolbarGUI);
@@ -26,8 +27,19 @@ namespace Mona
             GUI.color = Color.white * 0.75f;
             GUI.contentColor = Color.white * 1.19f;
 
+            if (GUILayout.Button(new GUIContent("○ Update", "Check template configuration")))
+            {
+                TemplateHelper.ShowWindow();
+            }
+
             GUI.contentColor = QualityAssurance.SpaceErrors != null && QualityAssurance.SpaceErrors.Count != 0 ? Color.red * 20.19f : Color.white * 1.2f;
 
+            if (GUILayout.Button(new GUIContent("☼ Mona Library", "Show Mona Library")))
+            {
+                MonaLibraryWindow.ShowWindow();
+            }
+
+            
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
             {
                 QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
@@ -50,7 +62,6 @@ namespace Mona
                 QualityAssuranceEditor.Init();
             }
             GUI.color = Color.white;
-
         }
     }
 }
