@@ -24,7 +24,7 @@ public class GizmosMona : MonoBehaviour
         bool spawnObstructed = true;
 
         // Check capsule collision so we don't spawn inside a wall
-        if (!Physics.CheckCapsule(transform.position + Vector3.up * MonaConstants.PlayerWidth, transform.position + Vector3.up * MonaConstants.PlayerColliderYOffset, MonaConstants.PlayerWidth))
+        if (!Physics.CheckCapsule(transform.position + Vector3.up * MonaConstants.PlayerWidth, transform.position + Vector3.up * MonaConstants.PlayerColliderYOffset, MonaConstants.PlayerWidth, 1, QueryTriggerInteraction.Ignore))
         {
             spawnObstructed = false;
         }
@@ -102,6 +102,7 @@ public class GizmosMona : MonoBehaviour
     // Draws all connections between MonaReactors
     static void DrawHooks(Mona.MonaEvent[] events, Transform transform)
     {
+        if (events == null) return;
         foreach (Mona.MonaEvent monaEvent in events)
         {
             if (monaEvent.Object == null) continue;
