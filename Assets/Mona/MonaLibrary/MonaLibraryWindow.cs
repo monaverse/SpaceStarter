@@ -10,6 +10,7 @@ namespace Mona
 {
     public class MonaLibraryWindow : EditorWindow
     {
+        static MonaLibraryWindow window = null;
         private readonly string at_PublicAPIKey = "keywC7DhH4fzXGWcg";
         private readonly string at_BaseID = "appglbIlOT8JLLnur";
         private readonly string at_RootTableID = "tblf3EHvQM36tPLJE"; 
@@ -23,14 +24,26 @@ namespace Mona
         [MenuItem("Mona/Mona Library")]
         public static void ShowWindow()
         { 
-            var window = EditorWindow.GetWindow(typeof(MonaLibraryWindow), false, "Mona Library");
+            window = EditorWindow.GetWindow(typeof(MonaLibraryWindow), false, "Mona Library") as MonaLibraryWindow;
             window.minSize = new Vector2(600,360);
             window.maxSize = new Vector2(600,1440);
+            window.isInitalized = false;
+            window.isLoading = false;
+        }
+
+        [UnityEditor.Callbacks.DidReloadScripts]
+        private static void OnScriptsReloaded() 
+        {
+            if (window == null)
+            {
+                ShowWindow();
+            }
         }
         void OnInspectorUpdate()
         {
             Repaint();
         }
+
         void OnGUI()
         {
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/library.png", typeof(Texture));
@@ -148,6 +161,7 @@ namespace Mona
                 EditorGUILayout.EndScrollView();
             }
         } 
+
         private IEnumerator getLibrary()
         {
             string json = "";
@@ -164,6 +178,7 @@ namespace Mona
                     {
                         Debug.Log("Mona Library API Request Failed: " + url + " Error = " + webReq.result);
                         json = "error";
+                        yield return new WaitForSecondsRealtime(5);
                     }
                     else
                     {
@@ -219,6 +234,7 @@ namespace Mona
             }
             isInitalized = true;
         }
+
         private IEnumerator DownloadThumbnail(string url)
         {
             using (UnityWebRequest imgReq = UnityWebRequestAssetBundle.GetAssetBundle(url))
@@ -236,6 +252,7 @@ namespace Mona
                 }
             }
         }
+
         private IEnumerator DownloadAssetPackage(string url, string name)
         {
             using (UnityWebRequest assetReq = new UnityWebRequest(url))
@@ -253,6 +270,7 @@ namespace Mona
                 }
             }
         }
+
         private string getJsonURL(string _base, int maxRecords, string[] fields)
         {
             string url = string.Concat
@@ -273,6 +291,7 @@ namespace Mona
             }
             return url;
         }
+
         private string FormatJson(string type, string json)
         {
             switch (type)
