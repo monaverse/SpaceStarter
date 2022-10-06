@@ -239,7 +239,7 @@ namespace Mona
         {
             using (UnityWebRequest imgReq = UnityWebRequestAssetBundle.GetAssetBundle(url))
             {
-                imgReq.SetRequestHeader($"Authorization", "Bearer {AIRTABLE_PUBLIC_API_KEY}");
+                imgReq.SetRequestHeader("Authorization", $"Bearer {AIRTABLE_PUBLIC_API_KEY}");
                 imgReq.downloadHandler = new DownloadHandlerTexture();
                 yield return imgReq.SendWebRequest();
                 if (imgReq.result != UnityWebRequest.Result.Success)
