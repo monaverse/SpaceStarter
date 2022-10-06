@@ -1,0 +1,8 @@
+The Mona Library is a growing collection of crowd sourced assets that builders have submitted to the community for use in their spaces under a CC0 License.
+If you want to add an asset to the library, check out the Library Submissions doc.
+
+https://docs.monaverse.com/resources/mona-library-submission
+
+Library Assets must be submitted as a .UnityPackage (.zip, .rar, etc will not work)
+
+When exporting package from unity do not include dependancies from the Mona Template as they will overwrite newer version on import.

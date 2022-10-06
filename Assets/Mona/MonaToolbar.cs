@@ -26,8 +26,31 @@ namespace Mona
             GUI.color = Color.white * 0.75f;
             GUI.contentColor = Color.white * 1.19f;
 
+            if (TemplateCheck.UpdateAvaliable)
+            {
+                if (GUILayout.Button(new GUIContent("○ Update", "Update Template")))
+                {
+                    TemplateHelper.ShowWindow();
+                }
+            }
+            else if (TemplateCheck.ConfigurationIssue)
+            {
+                if (GUILayout.Button(new GUIContent("○ Setup Error", "Check Template Configuration")))
+                {
+                    TemplateHelper.ShowWindow();
+                }
+            }
+
+            if (GUILayout.Button(new GUIContent("☼ Mona Library", "Show Mona Library")))
+            {
+                MonaLibraryWindow.ShowWindow();
+            }
+
             GUI.contentColor = QualityAssurance.SpaceErrors != null && QualityAssurance.SpaceErrors.Count != 0 ? Color.red * 20.19f : Color.white * 1.2f;
 
+            GUILayout.Space(25);
+
+            
             if (GUILayout.Button(new GUIContent("▶️ Playground", "Build and open playground")))
             {
                 QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
@@ -50,7 +73,6 @@ namespace Mona
                 QualityAssuranceEditor.Init();
             }
             GUI.color = Color.white;
-
         }
     }
 }
