@@ -11,9 +11,9 @@ namespace Mona
     public class MonaLibraryWindow : EditorWindow
     {
         static MonaLibraryWindow window = null;
-        private readonly string at_PublicAPIKey = "keywC7DhH4fzXGWcg";
-        private readonly string at_BaseID = "appglbIlOT8JLLnur";
-        private readonly string at_RootTableID = "tblf3EHvQM36tPLJE"; 
+        private readonly string AIRTABLE_PUBLIC_API_KEY = "keywC7DhH4fzXGWcg";
+        private readonly string AIRTABLE_BASE_ID = "appglbIlOT8JLLnur";
+        private readonly string AIRTABLE_ROOTTABLE_ID = "tblf3EHvQM36tPLJE"; 
         private bool isInitalized = false, isLoading = false;
         private string searchString = "";
         private Vector2 scrollPos = new Vector2(0,0);
@@ -171,12 +171,12 @@ namespace Mona
             {
                 using (UnityWebRequest webReq = new UnityWebRequest(url))
                 {
-                    webReq.SetRequestHeader("Authorization", "Bearer " + at_PublicAPIKey);
+                    webReq.SetRequestHeader("Authorization", $"Bearer {AIRTABLE_PUBLIC_API_KEY}");
                     webReq.downloadHandler = new DownloadHandlerBuffer();
                     yield return webReq.SendWebRequest();
                     if (webReq.result != UnityWebRequest.Result.Success)
                     {
-                        Debug.Log("Mona Library API Request Failed: " + url + " Error = " + webReq.result);
+                        Debug.Log($"Mona Library API Request Failed: {url} Error = {webReq.result}");
                         json = "error";
                         yield return new WaitForSecondsRealtime(5);
                     }
@@ -188,7 +188,7 @@ namespace Mona
             }
             
             fields = new string[] {"name","table","type"};
-            yield return EditorCoroutineUtility.StartCoroutine(DownloadJson("sections", getJsonURL(at_RootTableID, 100, fields)), this);
+            yield return EditorCoroutineUtility.StartCoroutine(DownloadJson("sections", getJsonURL(AIRTABLE_ROOTTABLE_ID, 100, fields)), this);
             if (json == "error")
             {
                 isLoading = false;
@@ -239,12 +239,12 @@ namespace Mona
         {
             using (UnityWebRequest imgReq = UnityWebRequestAssetBundle.GetAssetBundle(url))
             {
-                imgReq.SetRequestHeader("Authorization", "Bearer " + at_PublicAPIKey);
+                imgReq.SetRequestHeader($"Authorization", "Bearer {AIRTABLE_PUBLIC_API_KEY}");
                 imgReq.downloadHandler = new DownloadHandlerTexture();
                 yield return imgReq.SendWebRequest();
                 if (imgReq.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.Log("Mona Library Asset Request Failed: " + url + imgReq.result);
+                    Debug.Log($"Mona Library Asset Request Failed: {url}{imgReq.result}");
                 }
                 else
                 {
@@ -257,16 +257,16 @@ namespace Mona
         {
             using (UnityWebRequest assetReq = new UnityWebRequest(url))
             {
-                assetReq.SetRequestHeader("Authorization", "Bearer " + at_PublicAPIKey);
-                assetReq.downloadHandler = new DownloadHandlerFile("/Assets/_MonaLibrary/" + name + "/.unitypackage");
+                assetReq.SetRequestHeader("Authorization", $"Bearer {AIRTABLE_PUBLIC_API_KEY}");
+                assetReq.downloadHandler = new DownloadHandlerFile($"/Assets/_MonaLibrary/{name}/.unitypackage");
                 yield return assetReq.SendWebRequest();
                 if (assetReq.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.Log("Mona Library Request Failed: " + url + assetReq.result);
+                    Debug.Log($"Mona Library Request Failed: {url}{assetReq.result}");
                 }
                 else
                 {
-                    AssetDatabase.ImportPackage("/Assets/_MonaLibrary/" + name + "/.unitypackage", true);
+                    AssetDatabase.ImportPackage($"/Assets/_MonaLibrary/{name}/.unitypackage", true);
                 }
             }
         }
@@ -276,7 +276,7 @@ namespace Mona
             string url = string.Concat
             (
                 "https://api.airtable.com/v0/",
-                at_BaseID,
+                AIRTABLE_BASE_ID,
                 "/",
                 _base,
                 "?maxRecords=",
@@ -286,7 +286,7 @@ namespace Mona
             {
                 foreach (string field in fields)
                 {
-                    url += ("&fields%5B%5D=" + field);
+                    url += ($"&fields%5B%5D={field}");
                 }
             }
             return url;
