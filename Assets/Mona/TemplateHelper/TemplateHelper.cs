@@ -153,10 +153,10 @@ namespace Mona
     public class TemplateHelper : EditorWindow
     {
         private TemplateChecker templateChecker;
-        [MenuItem("Mona/Template Helper")]
+        [MenuItem("Mona/Template Utility")]
         public static void ShowWindow()
         { 
-            var window = EditorWindow.GetWindow(typeof(TemplateHelper), false, "Template Helper");
+            var window = EditorWindow.GetWindow(typeof(TemplateHelper), false, "Template Utility");
             window.minSize = new Vector2(498,250);
             window.maxSize = new Vector2(498,250);
         }
