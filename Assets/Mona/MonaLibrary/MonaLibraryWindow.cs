@@ -23,7 +23,8 @@ namespace Mona
 
         [MenuItem("Mona/Mona Library")]
         public static void ShowWindow()
-        { 
+        {
+            SessionState.SetBool("MonaLibraryOpen", true);
             window = EditorWindow.GetWindow(typeof(MonaLibraryWindow), false, "Mona Library") as MonaLibraryWindow;
             window.minSize = new Vector2(600,360);
             window.maxSize = new Vector2(600,1440);
@@ -34,10 +35,14 @@ namespace Mona
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void OnScriptsReloaded() 
         {
-            if (window == null)
+            if (SessionState.GetBool("MonaLibraryOpen", false))
             {
                 ShowWindow();
             }
+        }
+        void OnDestroy()
+        {
+            SessionState.SetBool("MonaLibraryOpen", false);
         }
         void OnInspectorUpdate()
         {
