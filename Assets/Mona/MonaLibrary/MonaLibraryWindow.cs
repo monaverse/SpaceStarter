@@ -258,7 +258,7 @@ namespace Mona
             using (UnityWebRequest assetReq = new UnityWebRequest(url))
             {
                 assetReq.SetRequestHeader("Authorization", $"Bearer {AIRTABLE_PUBLIC_API_KEY}");
-                assetReq.downloadHandler = new DownloadHandlerFile($"/Assets/_MonaLibrary/{name}/.unitypackage");
+                assetReq.downloadHandler = new DownloadHandlerFile($"Assets/_MonaLibrary/{name}/.unitypackage");
                 yield return assetReq.SendWebRequest();
                 if (assetReq.result != UnityWebRequest.Result.Success)
                 {
@@ -266,7 +266,7 @@ namespace Mona
                 }
                 else
                 {
-                    AssetDatabase.ImportPackage($"/Assets/_MonaLibrary/{name}/.unitypackage", true);
+                    AssetDatabase.ImportPackage($"Assets/_MonaLibrary/{name}/.unitypackage", true);
                 }
             }
         }
