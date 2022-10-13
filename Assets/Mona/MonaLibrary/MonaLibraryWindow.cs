@@ -23,7 +23,8 @@ namespace Mona
 
         [MenuItem("Mona/Mona Library")]
         public static void ShowWindow()
-        { 
+        {
+            SessionState.SetBool("MonaLibraryOpen", true);
             window = EditorWindow.GetWindow(typeof(MonaLibraryWindow), false, "Mona Library") as MonaLibraryWindow;
             window.minSize = new Vector2(600,360);
             window.maxSize = new Vector2(600,1440);
@@ -34,10 +35,14 @@ namespace Mona
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void OnScriptsReloaded() 
         {
-            if (window == null)
+            if (SessionState.GetBool("MonaLibraryOpen", false))
             {
                 ShowWindow();
             }
+        }
+        void OnDestroy()
+        {
+            SessionState.SetBool("MonaLibraryOpen", false);
         }
         void OnInspectorUpdate()
         {
@@ -258,7 +263,7 @@ namespace Mona
             using (UnityWebRequest assetReq = new UnityWebRequest(url))
             {
                 assetReq.SetRequestHeader("Authorization", $"Bearer {AIRTABLE_PUBLIC_API_KEY}");
-                assetReq.downloadHandler = new DownloadHandlerFile($"/Assets/_MonaLibrary/{name}/.unitypackage");
+                assetReq.downloadHandler = new DownloadHandlerFile($"Assets/_MonaLibrary/{name}/.unitypackage");
                 yield return assetReq.SendWebRequest();
                 if (assetReq.result != UnityWebRequest.Result.Success)
                 {
@@ -266,7 +271,7 @@ namespace Mona
                 }
                 else
                 {
-                    AssetDatabase.ImportPackage($"/Assets/_MonaLibrary/{name}/.unitypackage", true);
+                    AssetDatabase.ImportPackage($"Assets/_MonaLibrary/{name}/.unitypackage", true);
                 }
             }
         }
