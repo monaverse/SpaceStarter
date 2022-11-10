@@ -70,49 +70,22 @@ namespace Mona
         public bool Local;
     }
 
-    // Collider events
-    [System.Serializable]
-    public struct ColliderEvent
-    {
-        [Tooltip("The label name shown to the player")]
-        public string Name;
-
-        [Tooltip("List of events to be executed when a player looks at this trigger")]
-        public Collider Collider;
-
-        [Tooltip("Normal Reactor event result")]
-        public MonaEvent InteractEvent;
-
-    }
-
-    // Collider events
-    [System.Serializable]
-    public struct LookEvent
-    {
-        [Tooltip("Internal name of this event")]
-        public string Name;
-
-        [Tooltip("List of events to be executed when a player looks at this trigger")]
-        public Collider Collider;
-
-        [Tooltip("Normal Reactor event result")]
-        public MonaEvent OnLookStart;
-
-        [Tooltip("Normal Reactor event result")]
-        public MonaEvent OnLookEnd;
-    }
-
     public partial class MonaReactor : MonoBehaviour
     {
         // Target API
         [HideInInspector]
-        public string Version = "1.5.0";
-
-        // Internal reference to self
-        private BoxCollider Collider;
+        public string Version = "1.6.0";
 
         // List of events to be executed
         private string[] EventGeneratorTags = { "Player" };
+
+        // Fired when reactor is enabled
+        [Tooltip("List of events to be executed when the reactor is enabled")]
+        public MonaEvent[] OnObjectEnable;
+
+        // Fired when reactor is disabled
+        [Tooltip("List of events to be executed when the reactor is disabled")]
+        public MonaEvent[] OnObjectDisable;
 
         // Fired when a GeneratorTarget has touched the collider
         [Tooltip("List of events to be executed when a GeneratorTarget has touched the collider")]
@@ -122,15 +95,21 @@ namespace Mona
         [Tooltip("List of events to be executed when a GeneratorTarget has left the collider")]
         public MonaEvent[] OnExitTrigger;
 
-        /*
         // When a player looks at this trigger and presses the interact button
         [Tooltip("List of events to be executed when a player looks at this trigger and presses the interact button")]
-        public ColliderEvent[] OnPlayerInteract;
+        public MonaEvent[] OnPlayerInteract;
+
+        // Text for the onscreen reactor UI
+        [Tooltip("Text to be shown on screen when looking at a OnPlayerInteract reactor")]
+        public string UITextPrompt;
 
         // On Player look at this trigger
         [Tooltip("List of events to be executed when a player looks at this trigger")]
-        public LookEvent[] OnPlayerLookAt;
-        */
+        public MonaEvent[] OnPlayerLookStart;
+        
+        // On Player look away from this trigger
+        [Tooltip("List of events to be executed when a player looks away from this trigger")]
+        public MonaEvent[] OnPlayerLookEnd;
 
     }
 }

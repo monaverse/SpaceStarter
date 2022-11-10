@@ -9,5 +9,8 @@ namespace Mona
 
         [Tooltip("Reset the rotation of the player to the warp point rotation")]
         public bool UseRotation;
+
+        [Tooltip("Should this warp be triggered when the player interacts (this will only work if the volume is not a trigger volume).")]
+        public bool OnInteract;
     }
 }
