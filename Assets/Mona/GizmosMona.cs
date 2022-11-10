@@ -72,8 +72,8 @@ public class GizmosMona : MonoBehaviour
 
         DrawHooks(reactor.OnEnterTrigger, transform);
         DrawHooks(reactor.OnExitTrigger, transform);
-        DrawHooks(reactor.OnObjectEnable, transform);
-        DrawHooks(reactor.OnObjectDisable, transform);
+        // DrawHooks(reactor.OnObjectEnable, transform);
+        // DrawHooks(reactor.OnObjectDisable, transform);
         DrawHooks(reactor.OnPlayerInteract, transform);
         DrawHooks(reactor.OnPlayerLookStart, transform);
         DrawHooks(reactor.OnPlayerLookEnd, transform);
@@ -88,8 +88,7 @@ public class GizmosMona : MonoBehaviour
         if (ppv == null) return;
 
         Gizmos.color = Color.yellow * 0.6f;
-        Gizmos.DrawIcon(transform.position, "PPV", true);
-
+        Gizmos.DrawIcon(transform.gameObject.GetComponent<BoxCollider>().center + transform.position, "PPV", true);
     }
 
     // Draws the rotation of the artifact spawn point
