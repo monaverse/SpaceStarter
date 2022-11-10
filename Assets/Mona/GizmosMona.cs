@@ -72,9 +72,13 @@ public class GizmosMona : MonoBehaviour
 
         DrawHooks(reactor.OnEnterTrigger, transform);
         DrawHooks(reactor.OnExitTrigger, transform);
+        DrawHooks(reactor.OnObjectEnable, transform);
+        DrawHooks(reactor.OnObjectDisable, transform);
+        DrawHooks(reactor.OnPlayerInteract, transform);
+        DrawHooks(reactor.OnPlayerLookStart, transform);
+        DrawHooks(reactor.OnPlayerLookEnd, transform);
 
         Gizmos.DrawIcon(transform.position, "Reactor", true);
-        DrawWireBox(transform);
     }
 
     // Draws the properties volumes
@@ -86,7 +90,6 @@ public class GizmosMona : MonoBehaviour
         Gizmos.color = Color.yellow * 0.6f;
         Gizmos.DrawIcon(transform.position, "PPV", true);
 
-        DrawWireBox(transform);
     }
 
     // Draws the rotation of the artifact spawn point
@@ -110,15 +113,6 @@ public class GizmosMona : MonoBehaviour
             Gizmos.DrawLine(transform.position, monaEvent.Object.transform.position);
             Gizmos.DrawIcon(monaEvent.Object.transform.position, "hooked", true);
         }
-    }
-
-    // Draw the outline of the box collider
-    static void DrawWireBox(Transform transform)
-    {
-        BoxCollider collider = transform.GetComponent<BoxCollider>();
-
-        if (collider == null) return;
-        Gizmos.DrawWireCube(collider.center + transform.position, collider.size);
     }
 
     // Draw capsule collider

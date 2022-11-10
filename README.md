@@ -8,9 +8,9 @@ https://unity3d.com/unity/whats-new/2020.3.18
 
 ## 📃 Documentation
 
-The official documentation website is [docs.mona.gallery](https://docs.mona.gallery/get-started).
+The official documentation website is [docs.monaverse.com](https://docs.monaverse.com/get-started).
 
-Mona [Video tutorials here](https://docs.mona.gallery/video-tutorials)
+Mona [Video tutorials here](https://docs.monaverse.com/mona-tutorials)
 
 
 ## 💬 Support
@@ -18,4 +18,4 @@ Mona [Video tutorials here](https://docs.mona.gallery/video-tutorials)
 For support, join our [Discord support channel](https://discord.gg/gcrGHzTerU)
 
 ## ⚙️ Template version
-1.3.0
+1.4.0
