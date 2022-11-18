@@ -18,4 +18,4 @@ Mona [Video tutorials here](https://docs.monaverse.com/mona-tutorials)
 For support, join our [Discord support channel](https://discord.gg/gcrGHzTerU)
 
 ## ⚙️ Template version
-1.4.0
+1.4.1
