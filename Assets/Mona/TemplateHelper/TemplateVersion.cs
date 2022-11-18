@@ -6,7 +6,7 @@ namespace Mona
 {
     public static class TemplateInfo
     {
-        public static readonly string Version = "1.3.0";
+        public static readonly string Version = "1.4.1";
         public static readonly string UnityVer = "2020.3.18";
     }
 }
