@@ -88,7 +88,10 @@ public class GizmosMona : MonoBehaviour
         if (ppv == null) return;
 
         Gizmos.color = Color.yellow * 0.6f;
-        Gizmos.DrawIcon(transform.gameObject.GetComponent<BoxCollider>().center + transform.position, "PPV", true);
+        if (transform.gameObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+        {
+            Gizmos.DrawIcon(collider.center + transform.position, "PPV", true);
+        }
     }
 
     // Draws the rotation of the artifact spawn point
