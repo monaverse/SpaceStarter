@@ -1,4 +1,4 @@
-![splash-min](https://user-images.githubusercontent.com/61861940/147894582-30f0b076-6647-46b2-b731-1a9535b19aa9.jpg)
+![github_v3](https://user-images.githubusercontent.com/16878403/213307671-f153951f-b0ce-4c19-96a3-321e8254bef7.png)
 <p align="center">Start building your own custom Mona Space using our official template</p>
 
 ## ⬇️ Unity Version
@@ -8,9 +8,9 @@ https://unity3d.com/unity/whats-new/2020.3.18
 
 ## 📃 Documentation
 
-The official documentation website is [docs.monaverse.com](https://docs.monaverse.com/get-started).
+The official documentation website is [docs.mona.gallery](https://docs.mona.gallery/get-started).
 
-Mona [Video tutorials here](https://docs.monaverse.com/mona-tutorials)
+Mona [Video tutorials here](https://docs.mona.gallery/video-tutorials)
 
 
 ## 💬 Support
@@ -18,4 +18,4 @@ Mona [Video tutorials here](https://docs.monaverse.com/mona-tutorials)
 For support, join our [Discord support channel](https://discord.gg/gcrGHzTerU)
 
 ## ⚙️ Template version
-1.4.1
+1.4.2
