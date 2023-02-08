@@ -2,15 +2,17 @@
 <p align="center">Start building your own custom Mona Space using our official template</p>
 
 ## ⬇️ Unity Version
-This template requires the ```Unity 2020.3.18``` version. You can download it here:
-https://unity3d.com/unity/whats-new/2020.3.18
+This template requires the ```Unity 2022.2.3f1``` version. You can download it here:
+https://unity.com/releases/editor/whats-new/2022.2.3
+
+Be sure to also install ```WebGL Build Support```.
 
 
 ## 📃 Documentation
 
-The official documentation website is [docs.mona.gallery](https://docs.mona.gallery/get-started).
+The official documentation website is [docs.monaverse.com](https://docs.monaverse.com/create/building-spaces/get-started).
 
-Mona [Video tutorials here](https://docs.mona.gallery/video-tutorials)
+Mona [Video tutorials here](https://docs.monaverse.com/create/resources/mona-tutorials)
 
 
 ## 💬 Support
@@ -18,4 +20,4 @@ Mona [Video tutorials here](https://docs.mona.gallery/video-tutorials)
 For support, join our [Discord support channel](https://discord.gg/gcrGHzTerU)
 
 ## ⚙️ Template version
-1.4.2
+2.0.0
