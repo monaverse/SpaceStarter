@@ -5,4 +5,4 @@ https://docs.monaverse.com/resources/mona-library-submission
 
 Library Assets must be submitted as a .UnityPackage (.zip, .rar, etc will not work)
 
-When exporting package from unity do not include dependancies from the Mona Template as they will overwrite newer version on import.
+When exporting package from unity do not include dependencies from the Mona Template as they will overwrite newer version on import.
