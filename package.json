@@ -1,0 +1,22 @@
+{
+    "name": "com.monaverse.mona-development-kit",
+    "version": "2.0.1",
+    "description": "Launch your own immersive web-based experience with the Monaverse Development Kit. Create, collect, and explore together across an infinite network of immersive experiences, all through your web browser.",
+    "displayName": "Monaverse Development Kit",
+    "unity": "2022.2",
+    "unityRelease": "3f1",
+    "author": {
+      "name": "Monaverse",
+      "email": "hello@monaverse.com",
+      "url": "https://github.com/monaverse/SpaceStarter"
+    },
+    "dependencies": {
+        "com.marijnzwemmer.unity-toolbar-extender": "1.4.1"
+    },
+    "documentationUrl": "https://docs.monaverse.com/",
+    "hideInEditor": false,
+    "keywords": [
+      "monaverse",
+      "metaverse"
+    ]
+  }
