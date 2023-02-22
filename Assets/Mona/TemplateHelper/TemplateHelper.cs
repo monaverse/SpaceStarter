@@ -193,7 +193,7 @@ namespace Mona
                 EditorGUILayout.LabelField($"Unity version installed is {Application.unityVersion} but {TemplateInfo.UnityVer} is required", EditorStyles.boldLabel);
                 if (GUILayout.Button("Info"))
                 {
-                    Application.OpenURL("https://docs.monaverse.com/get-started#1.-install-unity-2020.3.18f1-free");
+                    Application.OpenURL("https://docs.monaverse.com/create/building-spaces/get-started#1.-install-unity-2022.2.3f1-free");
                 }
             }
             if (templateChecker.Update == "")
@@ -225,7 +225,7 @@ namespace Mona
                 EditorGUILayout.LabelField("WebGL Build Module: Missing", EditorStyles.boldLabel);
                 if (GUILayout.Button("Info"))
                 {
-                    Application.OpenURL("https://docs.monaverse.com/create-your-space/troubleshooting");
+                    Application.OpenURL("https://docs.monaverse.com/create/building-spaces/create-your-space/troubleshooting");
                 }
             }
         }
