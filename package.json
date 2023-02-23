@@ -11,7 +11,6 @@
       "url": "https://github.com/monaverse/SpaceStarter"
     },
     "dependencies": {
-      "https://github.com/marijnz/unity-toolbar-extender.git": "1.4.1"
     },
     "documentationUrl": "https://docs.monaverse.com/",
     "hideInEditor": false,

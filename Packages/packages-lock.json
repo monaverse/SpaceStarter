@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.marijnzwemmer.unity-toolbar-extender": {
-      "version": "file:unity-toolbar-extender-master",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.ai.navigation": {
       "version": "1.1.1",
       "depth": 0,
