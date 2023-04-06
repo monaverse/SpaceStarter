@@ -18,7 +18,6 @@ namespace Mona
             {
                 Constants.SpacePath,
                 Constants.PortalsPath,
-                Constants.ArtifactsPath
             };
 
             foreach (string scene in sceneList)

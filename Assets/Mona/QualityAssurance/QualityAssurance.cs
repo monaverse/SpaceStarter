@@ -20,24 +20,16 @@ namespace Mona
 
             TestSceneExistence("Space", MonaErrorCodes.MISSING_SPACE_SCENE);
             TestSceneExistence("Portals", MonaErrorCodes.MISSING_PORTAL_SCENE);
-            TestSceneExistence("Artifacts", MonaErrorCodes.MISSING_ARTIFACT_SCENE);
 
             TestSceneLayer("Space", "Space", MonaErrorCodes.MISSING_SPACE_LAYER, MonaErrorCodes.MULTIPLE_SPACE_ROOTS);
             TestSceneLayer("Portals", "PortalLayer", MonaErrorCodes.MISSING_PORTAL_LAYER, MonaErrorCodes.MULTIPLE_PORTAL_ROOTS);
-            TestSceneLayer("Artifacts", "ArtifactLayer", MonaErrorCodes.MISSING_ARTIFACT_LAYER, MonaErrorCodes.MULTIPLE_ARTIFACT_ROOTS);
 
-            TestObjectPlacements("Artifact", "ArtifactLayer", MonaErrorCodes.BAD_ARTIFACT_PLACEMENT);
-            TestObjectPlacements("Canvas", "ArtifactLayer", MonaErrorCodes.BAD_CANVAS_PLACEMENT);
             TestObjectPlacements("Portal", "PortalLayer", MonaErrorCodes.BAD_PORTAL_PLACEMENT);
 
-            TestNameUniqueness("Artifact", MonaErrorCodes.DUPLICATE_ARTIFACT_NAME);
-            TestNameUniqueness("Canvas", MonaErrorCodes.DUPLICATE_CANVAS_NAME);
             TestNameUniqueness("Portal", MonaErrorCodes.DUPLICATE_PORTAL_NAME);
 
             TestLayerContents("PortalLayer", "Portal", MonaErrorCodes.BAD_PORTAL_LAYER_CONTENTS);
-
-            TestObjectColliders<MeshCollider>("Canvas", MonaErrorCodes.BAD_CANVAS_COLLIDER);
-            TestObjectColliders<Collider>("Artifact", MonaErrorCodes.BAD_ARTIFACT_COLLIDER);
+            
             TestObjectColliders<BoxCollider>("Portal", MonaErrorCodes.BAD_PORTAL_COLLIDER);
 
             if (HierarchyDrawer != null)

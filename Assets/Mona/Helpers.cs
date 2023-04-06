@@ -11,7 +11,6 @@ namespace Mona
         public static readonly string PlaygroundDirectory = "Exports/PlaygroundFiles";
         public static readonly string MintingFile = "Exports/MintablePackage.unitypackage";
         public static readonly string SpacePath = "Assets/Scenes/Space.unity";
-        public static readonly string ArtifactsPath = "Assets/Scenes/Artifacts.unity";
         public static readonly string PortalsPath = "Assets/Scenes/Portals.unity";
         public static readonly string PlaygroundURL = "https://monaverse.com/playground";
     }

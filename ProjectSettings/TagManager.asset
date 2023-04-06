@@ -4,15 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Artifact
   - Portal
-  - Stage
-  - ArtifactLayer
   - PortalLayer
-  - StageLayer
   - Space
   - SpawnPoint
-  - Canvas
   layers:
   - Default
   - TransparentFX
@@ -22,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ignore MonaRaycast
   - 
   - 
   - 

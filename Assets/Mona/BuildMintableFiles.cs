@@ -16,7 +16,6 @@ namespace Mona
             {
                 Constants.SpacePath,
                 Constants.PortalsPath,
-                Constants.ArtifactsPath
             };
 
             List<string> exportsList = new List<string>();
