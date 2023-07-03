@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEditor;
 using Unity.EditorCoroutines.Editor;
@@ -11,12 +12,13 @@ namespace Mona
     public class MonaLibraryWindow : EditorWindow
     {
         static MonaLibraryWindow window = null;
-        private readonly string AIRTABLE_PUBLIC_API_KEY = "keywC7DhH4fzXGWcg";
+        private readonly string AIRTABLE_PUBLIC_API_KEY = "pat9rVBOrcxurF56k.6cf822174f832767665e8a2dfeb0790a0a46c694453882cb09409a56928e3dca";
         private readonly string AIRTABLE_BASE_ID = "appglbIlOT8JLLnur";
         private readonly string AIRTABLE_ROOTTABLE_ID = "tblf3EHvQM36tPLJE"; 
-        private bool isInitalized = false, isLoading = false;
-        private string searchString = "";
-        private Vector2 scrollPos = new Vector2(0,0);
+        private bool _isInitalized = false;
+        private bool _isLoading = false;
+        private string _searchString = "";
+        private Vector2 _scrollPos = new Vector2(0,0);
 
         private MonaLibrary monaLibrary;
         private int sectionTab;
@@ -28,8 +30,8 @@ namespace Mona
             window = EditorWindow.GetWindow(typeof(MonaLibraryWindow), false, "Mona Library") as MonaLibraryWindow;
             window.minSize = new Vector2(600,360);
             window.maxSize = new Vector2(600,1440);
-            window.isInitalized = false;
-            window.isLoading = false;
+            window._isInitalized = false;
+            window._isLoading = false;
         }
 
         [UnityEditor.Callbacks.DidReloadScripts]
@@ -44,11 +46,7 @@ namespace Mona
         {
             SessionState.SetBool("MonaLibraryOpen", false);
         }
-        void OnInspectorUpdate()
-        {
-            Repaint();
-        }
-
+        
         void OnGUI()
         {
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/library.png", typeof(Texture));
@@ -63,14 +61,14 @@ namespace Mona
             }
             if (GUILayout.Button("Refresh"))
             {
-                isInitalized = false;
-                isLoading = false;
+                _isInitalized = false;
+                _isLoading = false;
             }
-            if (!isInitalized)
+            if (!_isInitalized)
             {
-                if (!isLoading)
+                if (!_isLoading)
                 {
-                    isLoading = true;
+                    _isLoading = true;
                     EditorCoroutineUtility.StartCoroutine(getLibrary(), this);
                 }
                 EditorGUILayout.LabelField("Loading Mona Library...", EditorStyles.boldLabel);
@@ -84,84 +82,77 @@ namespace Mona
                     sections[i] = monaLibrary.sections.records[i].fields.name;
                 }
                 sectionTab = GUILayout.Toolbar (sectionTab, sections);
-                searchString = GUILayout.TextField(searchString, GUI.skin.FindStyle("ToolbarSeachTextField"));
-                scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-                try
+                _searchString = GUILayout.TextField(_searchString, GUI.skin.FindStyle("ToolbarSeachTextField"));
+                _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
+                if (monaLibrary.sections.records[sectionTab].fields.type == "asset")
                 {
-                    if (monaLibrary.sections.records[sectionTab].fields.type == "asset")
+                    for (int i = 0; i < monaLibrary.assets[sectionTab].records.Count;)
                     {
-                        for (int i = 0; i < monaLibrary.assets[sectionTab].records.Count;)
+                        GUILayout.BeginHorizontal();
+                        for (int j = 0; j < (int)(this.position.width / 145) & i < monaLibrary.assets[sectionTab].records.Count;)
                         {
-                            GUILayout.BeginHorizontal();
-                            for (int j = 0; j < (int)(this.position.width / 145) & i < monaLibrary.assets[sectionTab].records.Count;)
+                            if (!monaLibrary.assets[sectionTab].records[i].fields.invalid & ( monaLibrary.assets[sectionTab].records[i].fields.name.ToLower().Contains(_searchString.ToLower()) | monaLibrary.assets[sectionTab].records[i].fields.artist.ToLower().Contains(_searchString.ToLower())))
                             {
-                                if (!monaLibrary.assets[sectionTab].records[i].fields.invalid & ( monaLibrary.assets[sectionTab].records[i].fields.name.ToLower().Contains(searchString.ToLower()) | monaLibrary.assets[sectionTab].records[i].fields.artist.ToLower().Contains(searchString.ToLower())))
+                                GUILayout.BeginVertical(monaLibrary.assets[sectionTab].records[i].fields.name, "window", GUILayout.Height(128), GUILayout.Width(128));
+                                EditorGUILayout.BeginHorizontal();
                                 {
-                                    GUILayout.BeginVertical(monaLibrary.assets[sectionTab].records[i].fields.name, "window", GUILayout.Height(128), GUILayout.Width(128));
-                                    EditorGUILayout.BeginHorizontal();
-                                    {
-                                        GUILayout.FlexibleSpace();
-                                        EditorGUILayout.LabelField(monaLibrary.assets[sectionTab].records[i].fields.artist, EditorStyles.wordWrappedMiniLabel);
-                                        GUILayout.FlexibleSpace();
-                                    }
-                                    EditorGUILayout.EndHorizontal();
-                                    if (monaLibrary.icons.ContainsKey(monaLibrary.assets[sectionTab].records[i].fields.icon[0].url))
-                                    {
-                                        GUILayout.Box(monaLibrary.icons[monaLibrary.assets[sectionTab].records[i].fields.icon[0].url], GUILayout.Width(128), GUILayout.Height(128));
-                                    }
-                                    else
-                                    {
-                                        monaLibrary.icons.Add(monaLibrary.assets[sectionTab].records[i].fields.icon[0].url, AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Editor/error_thumb.png"));
-                                        EditorCoroutineUtility.StartCoroutine(DownloadThumbnail(monaLibrary.assets[sectionTab].records[i].fields.icon[0].url), this);
-                                    }
-                                    if (GUILayout.Button("Download"))
-                                    {
-                                        EditorCoroutineUtility.StartCoroutine(DownloadAssetPackage(monaLibrary.assets[sectionTab].records[i].fields.file[0].url, monaLibrary.assets[sectionTab].records[i].fields.file[0].filename), this);
-                                    }
-                                    GUILayout.EndVertical();
-                                    j++;
+                                    GUILayout.FlexibleSpace();
+                                    EditorGUILayout.LabelField(monaLibrary.assets[sectionTab].records[i].fields.artist, EditorStyles.wordWrappedMiniLabel);
+                                    GUILayout.FlexibleSpace();
                                 }
-                                i++;
-                            }
-                            GUILayout.EndHorizontal();
-                        }
-                    }
-                    else if (monaLibrary.sections.records[sectionTab].fields.type == "tool")
-                    {
-                        for (int i = 0; i < monaLibrary.tools[sectionTab].records.Count;)
-                        {
-                            GUILayout.BeginHorizontal();
-                            for (int j = 0; j < (int)(this.position.width / 145) & i < monaLibrary.tools[sectionTab].records.Count;)
-                            {
-                                if (monaLibrary.tools[sectionTab].records[i].fields.name.ToLower().Contains(searchString.ToLower()))
+                                EditorGUILayout.EndHorizontal();
+                                if (monaLibrary.icons.ContainsKey(monaLibrary.assets[sectionTab].records[i].fields.icon[0].url))
                                 {
-                                    GUILayout.BeginVertical(monaLibrary.tools[sectionTab].records[i].fields.name, "window", GUILayout.Height(128), GUILayout.Width(128));
-                                    if (monaLibrary.icons.ContainsKey(monaLibrary.tools[sectionTab].records[i].fields.icon[0].url))
-                                    {
-                                        GUILayout.Box(monaLibrary.icons[monaLibrary.tools[sectionTab].records[i].fields.icon[0].url], GUILayout.Width(128), GUILayout.Height(128));
-                                    }
-                                    else
-                                    {
-                                        monaLibrary.icons.Add(monaLibrary.tools[sectionTab].records[i].fields.icon[0].url, AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Editor/error_thumb.png"));
-                                        EditorCoroutineUtility.StartCoroutine(DownloadThumbnail(monaLibrary.tools[sectionTab].records[i].fields.icon[0].url), this);
-                                    }
-                                    if (GUILayout.Button("Download"))
-                                    {
-                                        EditorCoroutineUtility.StartCoroutine(DownloadAssetPackage(monaLibrary.tools[sectionTab].records[i].fields.file[0].url, monaLibrary.tools[sectionTab].records[i].fields.file[0].filename), this);
-                                    }
-                                    GUILayout.EndVertical();
-                                    j++;
+                                    GUILayout.Box(monaLibrary.icons[monaLibrary.assets[sectionTab].records[i].fields.icon[0].url], GUILayout.Width(128), GUILayout.Height(128));
                                 }
-                                i++;
+                                else
+                                {
+                                    monaLibrary.icons.Add(monaLibrary.assets[sectionTab].records[i].fields.icon[0].url, AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Editor/error_thumb.png"));
+                                    _ = DownloadThumbnailAsync(monaLibrary.assets[sectionTab].records[i].fields.icon[0].url);
+                                }
+                                if (GUILayout.Button("Download"))
+                                {
+                                    _ = DownloadAssetPackageAsync(monaLibrary.assets[sectionTab].records[i].fields.file[0].url, monaLibrary.assets[sectionTab].records[i].fields.file[0].filename);
+                                }
+                                GUILayout.EndVertical();
+                                j++;
                             }
-                            GUILayout.EndHorizontal();
+                            i++;
                         }
-                                
+                        GUILayout.EndHorizontal();
                     }
                 }
-                catch
+                else if (monaLibrary.sections.records[sectionTab].fields.type == "tool")
                 {
-                    Repaint();
+                    for (int i = 0; i < monaLibrary.tools[sectionTab].records.Count;)
+                    {
+                        GUILayout.BeginHorizontal();
+                        for (int j = 0; j < (int)(this.position.width / 145) & i < monaLibrary.tools[sectionTab].records.Count;)
+                        {
+                            if (monaLibrary.tools[sectionTab].records[i].fields.name.ToLower().Contains(_searchString.ToLower()))
+                            {
+                                GUILayout.BeginVertical(monaLibrary.tools[sectionTab].records[i].fields.name, "window", GUILayout.Height(128), GUILayout.Width(128));
+                                if (monaLibrary.icons.ContainsKey(monaLibrary.tools[sectionTab].records[i].fields.icon[0].url))
+                                {
+                                    GUILayout.Box(monaLibrary.icons[monaLibrary.tools[sectionTab].records[i].fields.icon[0].url], GUILayout.Width(128), GUILayout.Height(128));
+                                }
+                                else
+                                {
+                                    monaLibrary.icons.Add(monaLibrary.tools[sectionTab].records[i].fields.icon[0].url, AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Editor/error_thumb.png"));
+                                    _ = DownloadThumbnailAsync(monaLibrary.tools[sectionTab].records[i].fields.icon[0].url);
+                                }
+                                if (GUILayout.Button("Download"))
+                                {
+                                    _ = DownloadAssetPackageAsync(monaLibrary.tools[sectionTab].records[i].fields.file[0].url, monaLibrary.tools[sectionTab].records[i].fields.file[0].filename);
+                                }
+                                GUILayout.EndVertical();
+                                j++;
+                            }
+                            i++;
+                        }
+                        GUILayout.EndHorizontal();
+                    }
+                            
                 }
                 EditorGUILayout.EndScrollView();
             }
@@ -196,7 +187,7 @@ namespace Mona
             yield return EditorCoroutineUtility.StartCoroutine(DownloadJson("sections", getJsonURL(AIRTABLE_ROOTTABLE_ID, 100, fields)), this);
             if (json == "error")
             {
-                isLoading = false;
+                _isLoading = false;
                 yield break;
             }
             monaLibrary = new MonaLibrary();
@@ -214,7 +205,7 @@ namespace Mona
                     yield return EditorCoroutineUtility.StartCoroutine(DownloadJson("tool", getJsonURL(monaLibrary.sections.records[i].fields.table, 300, fields)), this);
                     if (json == "error")
                     {
-                        isLoading = false;
+                        _isLoading = false;
                         yield break;
                     }
                     monaLibrary.tempTool = new MonaLibrary.Tools();
@@ -228,7 +219,7 @@ namespace Mona
                     yield return EditorCoroutineUtility.StartCoroutine(DownloadJson("asset", getJsonURL(monaLibrary.sections.records[i].fields.table, 300, fields)), this);
                     if (json == "error")
                     {
-                        isLoading = false;
+                        _isLoading = false;
                         yield break;
                     }
                     monaLibrary.tempAsset = new MonaLibrary.Assets();
@@ -237,16 +228,22 @@ namespace Mona
                     monaLibrary.assets.Add(i, monaLibrary.tempAsset);
                 }
             }
-            isInitalized = true;
+            _isInitalized = true;
         }
 
-        private IEnumerator DownloadThumbnail(string url)
+        private async Task DownloadThumbnailAsync(string url)
         {
-            using (UnityWebRequest imgReq = UnityWebRequestAssetBundle.GetAssetBundle(url))
+            await Task.Yield();
+
+            using (UnityWebRequest imgReq = UnityWebRequestTexture.GetTexture(url))
             {
                 imgReq.SetRequestHeader("Authorization", $"Bearer {AIRTABLE_PUBLIC_API_KEY}");
-                imgReq.downloadHandler = new DownloadHandlerTexture();
-                yield return imgReq.SendWebRequest();
+
+                var operation = imgReq.SendWebRequest();
+                
+                while (!operation.isDone)
+                    await Task.Delay(100);
+
                 if (imgReq.result != UnityWebRequest.Result.Success)
                 {
                     Debug.Log($"Mona Library Asset Request Failed: {url}{imgReq.result}");
@@ -258,20 +255,28 @@ namespace Mona
             }
         }
 
-        private IEnumerator DownloadAssetPackage(string url, string name)
+        private async Task DownloadAssetPackageAsync(string url, string name)
         {
+            await Task.Yield(); 
+
             using (UnityWebRequest assetReq = new UnityWebRequest(url))
             {
+                string filePath = $"Assets/_MonaLibrary/{name}/.unitypackage";
                 assetReq.SetRequestHeader("Authorization", $"Bearer {AIRTABLE_PUBLIC_API_KEY}");
-                assetReq.downloadHandler = new DownloadHandlerFile($"Assets/_MonaLibrary/{name}/.unitypackage");
-                yield return assetReq.SendWebRequest();
+                assetReq.downloadHandler = new DownloadHandlerFile(filePath);
+
+                var operation = assetReq.SendWebRequest();
+
+                while (!operation.isDone)
+                    await Task.Delay(100);
+
                 if (assetReq.result != UnityWebRequest.Result.Success)
                 {
                     Debug.Log($"Mona Library Request Failed: {url}{assetReq.result}");
                 }
                 else
                 {
-                    AssetDatabase.ImportPackage($"Assets/_MonaLibrary/{name}/.unitypackage", true);
+                    AssetDatabase.ImportPackage(filePath, true);
                 }
             }
         }
