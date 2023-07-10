@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
@@ -128,6 +129,26 @@ namespace Mona
                 Collider collider = sceneObject.GetComponent<T>() as Collider;
                 if (collider != null || collider.enabled || !collider.isTrigger) continue;
                 AddError(error, sceneObject.GetInstanceID());
+            }
+        }
+
+        public static void TestCrunchCompression(string error)
+        {
+            string[] guids = AssetDatabase.FindAssets("t:Texture2D", null);
+            foreach (string guid in guids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
+
+                if (importer != null)
+                {
+                    // Check if Crunch compression is enabled
+                    if (importer.crunchedCompression == true)
+                    {
+                        Debug.LogWarning($"Mona does not support cunrch compression. Disable crunch compression in the importer for ({path})");
+                        AddError(error, -1);
+                    }
+                }
             }
         }
     }

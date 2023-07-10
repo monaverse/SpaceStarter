@@ -25,7 +25,7 @@ namespace Mona
             Scroll = GUILayout.BeginScrollView(Scroll, false, false);
 
             GUIStyle buttonStyle = GUI.skin.button;
-            buttonStyle.margin = new RectOffset(30, 30, 10, 10);
+            buttonStyle.margin = new RectOffset(40, 40, 10, 10);
 
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/qa.png", typeof(Texture));
             if (banner)
@@ -53,10 +53,10 @@ namespace Mona
                     title = title.Substring(0, 1).ToUpper() + title.Substring(1);
 
                     GUILayout.BeginHorizontal("box");
-                    GUILayout.Box(title + " ( " + QualityAssurance.SpaceErrors[error].Count + " )", GUILayout.MinWidth(100));
+                    GUILayout.Box(title + " ( " + QualityAssurance.SpaceErrors[error].Count + " )", GUILayout.MinWidth(110));
                     GUILayout.BeginVertical();
 
-                    GUILayout.Label(QualityAssurance.GetErrorDescription(error));
+                    GUILayout.Label(QualityAssurance.GetErrorDescription(error), new GUIStyle(GUI.skin.GetStyle("label")) { wordWrap = true });
 
                     if (QualityAssurance.SpaceErrors[error] != null && QualityAssurance.SpaceErrors[error][0] != -1)
                     {

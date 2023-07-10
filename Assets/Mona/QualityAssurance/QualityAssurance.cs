@@ -40,6 +40,8 @@ namespace Mona
             TestObjectColliders<Collider>("Artifact", MonaErrorCodes.BAD_ARTIFACT_COLLIDER);
             TestObjectColliders<BoxCollider>("Portal", MonaErrorCodes.BAD_PORTAL_COLLIDER);
 
+            TestCrunchCompression(MonaErrorCodes.TEXTURE_CRUNCH_COMPRESSION);
+
             if (HierarchyDrawer != null)
             {
                 HierarchyDrawer.Unregister();

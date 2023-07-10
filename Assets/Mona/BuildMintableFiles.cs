@@ -12,27 +12,32 @@ namespace Mona
             Helpers.UpsertExportsDirectory();
             BuildPlaygroundFiles.BuildPlaygroundFilesHandler();
 
-            List<string> sceneList = new List<string>()
-            {
-                Constants.SpacePath,
-                Constants.PortalsPath,
-                Constants.ArtifactsPath
-            };
+            QualityAssurance.SpaceErrors = QualityAssurance.GetSpaceErrors();
 
-            List<string> exportsList = new List<string>();
-
-            foreach (string scene in sceneList)
+            if (QualityAssurance.SpaceErrors == null || QualityAssurance.SpaceErrors.Count == 0)
             {
-                exportsList.Add(scene);
-                string[] sceneDependencies = AssetDatabase.GetDependencies(scene, true);
-                foreach (string dependency in sceneDependencies)
+                List<string> sceneList = new List<string>()
                 {
-                    exportsList.Add(dependency);
-                }
-            }
+                    Constants.SpacePath,
+                    Constants.PortalsPath,
+                    Constants.ArtifactsPath
+                };
 
-            AssetDatabase.ExportPackage(exportsList.ToArray(), Constants.MintingFile, ExportPackageOptions.Recurse);
-            Helpers.OpenDirectory(Constants.ExportsDirectory);
+                List<string> exportsList = new List<string>();
+
+                foreach (string scene in sceneList)
+                {
+                    exportsList.Add(scene);
+                    string[] sceneDependencies = AssetDatabase.GetDependencies(scene, true);
+                    foreach (string dependency in sceneDependencies)
+                    {
+                        exportsList.Add(dependency);
+                    }
+                }
+
+                AssetDatabase.ExportPackage(exportsList.ToArray(), Constants.MintingFile, ExportPackageOptions.Recurse);
+                Helpers.OpenDirectory(Constants.ExportsDirectory);
+            }
         }
     }
 }
