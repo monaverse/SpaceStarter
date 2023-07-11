@@ -1,9 +1,9 @@
 #if UNITY_EDITOR
-using System.Collections;
+using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEditor;
-using Unity.EditorCoroutines.Editor;
 using UnityEngine.Networking;
 
 namespace Mona
@@ -11,7 +11,7 @@ namespace Mona
     [InitializeOnLoad]
     public class TemplateCheck
     {
-        public static readonly string AIRTABLE_PUBLIC_API_KEY = "keywC7DhH4fzXGWcg";
+        public static readonly string AIRTABLE_PUBLIC_API_KEY = "pat9rVBOrcxurF56k.6cf822174f832767665e8a2dfeb0790a0a46c694453882cb09409a56928e3dca";
         public static bool UpdateAvaliable = false;
         public static bool ConfigurationIssue = false;
         static TemplateCheck()
@@ -22,7 +22,7 @@ namespace Mona
                 
                 TemplateChecker templateChecker = new TemplateChecker();
                 
-                EditorCoroutineUtility.StartCoroutine(templateChecker.GetUpdate(), templateChecker);
+                _ = templateChecker.GetUpdateAsync();
 
                 ConfigurationIssue = !templateChecker.HasCorrectUVersion();
                 if (!ConfigurationIssue)
@@ -69,13 +69,16 @@ namespace Mona
         }
         private TemplateVersion templateVersion;
 
-        public IEnumerator GetUpdate()
+        public async Task GetUpdateAsync()
         {
             using (UnityWebRequest webReq = new UnityWebRequest(url))
             {
                 webReq.SetRequestHeader("Authorization", $"Bearer {TemplateCheck.AIRTABLE_PUBLIC_API_KEY}");
                 webReq.downloadHandler = new DownloadHandlerBuffer();
-                yield return webReq.SendWebRequest();
+
+                var operation = webReq.SendWebRequest();
+                while (!operation.isDone) await Task.Delay(100);
+
                 if (webReq.result != UnityWebRequest.Result.Success)
                 {
                     Debug.Log($"Failed to check for update: {webReq.result}");
@@ -101,6 +104,8 @@ namespace Mona
                 }
             }
         }
+
+
         public bool HasCorrectUVersion()
         {
             if (Application.unityVersion.Contains(TemplateInfo.UnityVer))
@@ -109,6 +114,7 @@ namespace Mona
             }
             return false;
         }
+
         public bool HasWebGLModule()
         {
             var moduleManager = System.Type.GetType("UnityEditor.Modules.ModuleManager,UnityEditor.dll");
@@ -120,6 +126,7 @@ namespace Mona
             }
             return false;
         }
+        
         // Takes 2 input version numbers and outputs -1, 0, 1 depending on which verion number is larger
         // Goes through each numerical part of the version number until it finds one version number which is great than the other.
         private int versionCompare(string v1, string v2)
@@ -157,6 +164,7 @@ namespace Mona
             return 0;
         }
     }
+
     public class TemplateHelper : EditorWindow
     {
         private TemplateChecker templateChecker;
@@ -167,12 +175,12 @@ namespace Mona
             window.minSize = new Vector2(498,250);
             window.maxSize = new Vector2(498,250);
         }
-        void OnGUI()
+        async void OnGUI()
         {
             if (templateChecker == null)
             {
                 templateChecker = new TemplateChecker();
-                EditorCoroutineUtility.StartCoroutine(templateChecker.GetUpdate(), this);
+                _ = templateChecker.GetUpdateAsync();
             }
             
             Texture banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/Editor/templatehelper.png", typeof(Texture));
@@ -211,7 +219,7 @@ namespace Mona
                     EditorGUILayout.LabelField("Template Update Avaliable", EditorStyles.boldLabel);
                     if (GUILayout.Button("Update"))
                     {
-                        EditorCoroutineUtility.StartCoroutine(DownloadAssetPackage(templateChecker.Update, templateChecker.FileName), this);
+                        await DownloadAssetPackageAsync(templateChecker.Update, templateChecker.FileName);
                     } 
                 }
             }
@@ -230,14 +238,18 @@ namespace Mona
             }
         }
         
-        private IEnumerator DownloadAssetPackage(string url, string name)
+        private async Task DownloadAssetPackageAsync(string url, string name)
         {
-            Debug.Log($"Downloading {url}");
+            //Debug.Log($"Downloading {url}");
+
             using (UnityWebRequest assetReq = new UnityWebRequest(url))
             {
                 assetReq.SetRequestHeader("Authorization", $"Bearer {TemplateCheck.AIRTABLE_PUBLIC_API_KEY}");
                 assetReq.downloadHandler = new DownloadHandlerFile($"Assets/{name}.unitypackage");
-                yield return assetReq.SendWebRequest();
+
+                var operation = assetReq.SendWebRequest();
+                while (!operation.isDone) await Task.Delay(100);
+
                 if (assetReq.result != UnityWebRequest.Result.Success)
                 {
                     Debug.Log($"Mona Library Request Failed: {url}{assetReq.result}");
@@ -245,6 +257,7 @@ namespace Mona
                 else
                 {
                     AssetDatabase.ImportPackage($"Assets/{name}.unitypackage", true);
+                    AssetDatabase.Refresh();
                 }
             }
         }
