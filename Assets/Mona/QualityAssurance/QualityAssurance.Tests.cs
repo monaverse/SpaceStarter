@@ -145,7 +145,7 @@ namespace Mona
                     // Check if Crunch compression is enabled
                     if (importer.crunchedCompression == true)
                     {
-                        Debug.LogWarning($"Mona does not support cunrch compression. Disable crunch compression in the importer for ({path})");
+                        Debug.LogWarning($"Mona does not support Crunch Compression. Please disable Crunch Compression in the importer for ({path})");
                         AddError(error, -1);
                     }
                 }
