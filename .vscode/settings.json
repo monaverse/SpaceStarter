@@ -73,5 +73,6 @@
         "titleBar.inactiveForeground": "#21152b"
       },
     "peacock.color": "#7a69c9",
-    "prettier.enable": false
+    "prettier.enable": false,
+    "dotnet.defaultSolution": "spacestarter.sln"
 }
