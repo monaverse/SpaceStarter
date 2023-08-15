@@ -32,7 +32,7 @@ namespace Mona
             bool found = false;
             foreach (var rootObject in rootObjects)
             {
-                if (rootObject.tag != layerTag) continue;
+                if (!rootObject.CompareTag(layerTag)) continue;
 
                 found = true;
                 break;
@@ -47,6 +47,7 @@ namespace Mona
                 if (
                     !rootObject.tag.Equals(layerTag)
                     && !rootObject.name.StartsWith("!ftraceLightmaps")
+                    && !rootObject.name.Equals("VisualScripting SceneVariables")
                     && !rootObject.name.Equals("PDC")
                     && rootObject.activeSelf
                 )
@@ -95,7 +96,7 @@ namespace Mona
 
                 foreach (string tag in validTags)
                 {
-                    if (rootObject.tag == tag) isValid = true;
+                    if (rootObject.CompareTag(tag)) isValid = true;
                 }
 
                 if (isValid) continue;
@@ -104,7 +105,7 @@ namespace Mona
                 {
                     foreach (string tag in validTags)
                     {
-                        if (child.tag != tag) continue;
+                        if (!child.CompareTag(tag)) continue;
                         isValid = true;
                         break;
                     }
