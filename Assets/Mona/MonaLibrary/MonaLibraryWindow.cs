@@ -104,7 +104,7 @@ namespace Mona
                 sections[i] = monaLibrary.sections.records[i].fields.name;
             }
             sectionTab = GUILayout.Toolbar (sectionTab, sections);
-            _searchString = GUILayout.TextField(_searchString, GUI.skin.FindStyle("ToolbarSeachTextField"));
+            _searchString = GUILayout.TextField(_searchString, GUI.skin.FindStyle("ToolbarSearchTextField"));
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
             if (monaLibrary.sections.records[sectionTab].fields.type == "asset")
             {
