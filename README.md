@@ -20,7 +20,7 @@ Mona [Video tutorials here](https://docs.monaverse.com/create/resources/mona-tut
 For support, join our [Discord support channel](https://discord.gg/gcrGHzTerU)
 
 ## ⚙️ Template version
-2.0.5
+2.0.6
 
 ## 🔄 Updating Template
 
