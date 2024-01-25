@@ -6,12 +6,54 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.monaverse.brainssdk": {
+      "version": "https://github.com/monaverse/MonaBrainsSDK.git#0.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ai.navigation": "1.1.4",
+        "com.unity.cinemachine": "2.9.7",
+        "com.unity.visualscripting": "1.8.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.physics2d": "1.0.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.textmeshpro": "3.0.6",
+        "com.unity.inputsystem": "1.6.3",
+        "com.monaverse.coresdk": "0.1.0"
+      },
+      "hash": "cb379033a9e26b4bc81711ebe5ed7d03ce775dd2"
+    },
+    "com.monaverse.coresdk": {
+      "version": "https://github.com/monaverse/MonaCoreSDK.git#0.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.visualscripting": "1.8.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.physics2d": "1.0.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0"
+      },
+      "hash": "3373269e12cb1afafe429dcc563d2fb8a081e1e3"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.ai": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.cinemachine": {
+      "version": "2.9.7",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
       },
       "url": "https://packages.unity.com"
     },
@@ -59,6 +101,15 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.inputsystem": {
+      "version": "1.6.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {

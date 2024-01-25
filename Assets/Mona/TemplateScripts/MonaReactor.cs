@@ -1,4 +1,8 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
+using Mona.SDK.Core.Body;
+using Mona.SDK.Core;
 
 namespace Mona
 {
@@ -30,7 +34,9 @@ namespace Mona
         // The target property is a boolean
         Boolean,
         // Trigger
-        Trigger
+        Trigger,
+        //None
+        None
     }
 
     // Set of supported components
@@ -70,14 +76,14 @@ namespace Mona
         public bool Local;
     }
 
-    public partial class MonaReactor : MonoBehaviour
+    public partial class MonaReactor : MonaBodyBase
     {
         // Target API
         [HideInInspector]
-        public string Version = "1.6.0";
+        public string Version = "1.7.0";
 
         // List of events to be executed
-        private string[] EventGeneratorTags = { "Player" };
+        private string[] EventGeneratorTags = { MonaCoreConstants.TAG_PLAYER };
 
         // Fired when reactor is enabled
         [Tooltip("List of events to be executed when the reactor is enabled")]
@@ -106,10 +112,9 @@ namespace Mona
         // On Player look at this trigger
         [Tooltip("List of events to be executed when a player looks at this trigger")]
         public MonaEvent[] OnPlayerLookStart;
-        
+
         // On Player look away from this trigger
         [Tooltip("List of events to be executed when a player looks away from this trigger")]
         public MonaEvent[] OnPlayerLookEnd;
-
     }
 }

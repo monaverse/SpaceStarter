@@ -44,10 +44,13 @@ namespace Mona
 
             foreach (var rootObject in rootObjects)
             {
-                if (
-                    !rootObject.tag.Equals(layerTag)
+                if (!rootObject.CompareTag(layerTag)
+                    && !rootObject.name.StartsWith("Mona")
                     && !rootObject.name.StartsWith("!ftraceLightmaps")
+                    && !rootObject.name.Equals("Reflection Probes Camera")
                     && !rootObject.name.Equals("VisualScripting SceneVariables")
+                    && !rootObject.name.Equals("VisualScripting GlobalEventListener")
+                    && !rootObject.name.Equals("MonaEventBus")
                     && !rootObject.name.Equals("PDC")
                     && rootObject.activeSelf
                 )
